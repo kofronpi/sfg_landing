@@ -18,7 +18,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Dosis', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     body {
@@ -40,47 +40,68 @@
     header {
       position: sticky;
       top: 0;
-      background: #fff;
-      border-bottom: 1px solid #ddd;
+      background: #0b0b0b; /* noir SFG */
+      border-bottom: 1px solid #1e1e1e;
       z-index: 20;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .logo img {
-      height: 48px;
-      width: auto;
     }
 
     .nav-links {
       display: flex;
-      gap: 1.2rem;
-      font-size: 0.9rem;
-      font-weight: 500;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
     }
 
     .nav-links a {
-      opacity: 0.8;
+      color: #fff;
+      opacity: 0.9;
     }
 
     .nav-links a:hover {
-      opacity: 1;
       color: var(--red);
+      opacity: 1;
     }
 
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
     /* HERO */
     .hero {
-      background:
-              linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
-              url("./assets/img/hero-sfg.jpg") center / cover no-repeat;
-      color: #fff;
-      padding: 5rem 1rem;
+      background-image: linear-gradient(
+              110deg,
+              hsl(231deg 53% 34%) 0%,
+              hsl(242deg 57% 35%) 8%,
+              hsl(253deg 61% 35%) 17%,
+              hsl(264deg 65% 36%) 25%,
+              hsl(275deg 69% 37%) 33%,
+              hsl(286deg 73% 38%) 42%,
+              hsl(296deg 77% 39%) 50%,
+              hsl(307deg 80% 40%) 58%,
+              hsl(318deg 85% 41%) 67%,
+              hsl(329deg 89% 41%) 75%,
+              hsl(340deg 93% 42%) 83%,
+              hsl(351deg 96% 43%) 92%,
+              hsl(2deg 100% 44%) 100%
+      );
+      min-height: 55vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
     }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(0, 0.6fr);
+      align-items: center;
+      gap: 2rem;
+      padding: 3.5rem 0;
+    }
+
     .hero h1 {
       font-size: clamp(2rem, 4vw, 3.2rem);
       line-height: 1.1;
@@ -88,11 +109,39 @@
       max-width: 800px;
     }
 
+    .hero-content {
+      color: white;
+      max-width: 620px;
+      position: relative;
+      z-index: 2;
+    }
     .hero p {
       max-width: 650px;
       font-size: 1.1rem;
       opacity: 0.95;
       margin-bottom: 2.2rem;
+    }
+
+    .hero-logo {
+      width: 290px;
+      height: auto;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-figure-wrap {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-figure {
+      width: clamp(520px, 60vw, 1100px);
+      max-width: none;
+      height: auto;
+      filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.35));
+      transform: translateX(-35%);
     }
 
     .cta-group {
@@ -261,6 +310,38 @@
     footer .grid {
       gap: 2rem;
     }
+
+    @media (max-width: 900px) {
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-layout {
+        grid-template-columns: 1fr;
+        text-align: left;
+        padding: 3rem 0 2.5rem;
+      }
+
+      .hero-figure {
+        width: min(100%, 640px);
+        transform: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-logo {
+        width: 120px;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero-figure {
+        width: min(100%, 520px);
+        transform: none;
+      }
+    }
   </style>
 </head>
 
@@ -268,9 +349,6 @@
 
 <header>
   <div class="container nav">
-    <div class="logo">
-      <img src="./assets/img/sfg_logo_blanc.png" alt="Logo SFG Savate">
-    </div>
     <nav class="nav-links">
       <a href="#">Le club</a>
       <a href="#">Disciplines</a>
@@ -282,15 +360,25 @@
 </header>
 
 <section class="hero">
-  <div class="container">
-    <h1>Le SFG, club de Savate Boxe Française à Lyon, pour tous les publics</h1>
-    <p>Loisir, jeunes, féminines, canne de combat et compétition. Un club historique, inclusif et engagé dans la performance.</p>
-    <div class="cta-group">
-      <a href="#" class="btn btn-primary">Faire un cours d’essai</a>
-      <a href="#" class="btn btn-secondary">Voir les disciplines</a>
+  <div class="container hero-layout">
+    <div class="hero-content">
+      <img class="hero-logo" src="./assets/img/sfg_logo_blanc.png" alt="Logo SFG Savate">
+      <h1>Le SFG, club de Savate Boxe Française à Lyon, pour tous les publics</h1>
+      <p>
+        Loisir, jeunes, féminines, compétition.
+        Un club historique, inclusif et engagé dans la performance.
+      </p>
+      <div class="cta-group">
+        <a class="btn btn-primary">Faire un cours d’essai</a>
+        <a class="btn btn-secondary">Voir les disciplines</a>
+      </div>
+    </div>
+    <div class="hero-figure-wrap">
+      <img class="hero-figure" src="./assets/img/boxeuse_sfg_transparency_comp.png" alt="Boxeuse SFG">
     </div>
   </div>
 </section>
+
 
 <section class="container">
   <h2>Un club, plusieurs pratiques</h2>
