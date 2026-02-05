@@ -213,6 +213,27 @@
     .highlight {
       background: var(--gray);
     }
+
+    .video-section {
+      background: #fff;
+    }
+
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .video-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
     
     /* WIDGET CALENDAR */
 	.next-course {
@@ -431,6 +452,22 @@
 </section>
 
 
+
+<section class="video-section">
+  <div class="container">
+    <h2>Présentation du club</h2>
+    <p class="intro">Un aperçu du SFG, de l’ambiance et de nos entraînements.</p>
+    <div class="video-wrap" style="margin-top: 1.6rem;">
+      <iframe
+        src="https://www.youtube.com/embed/hCm3lVSozt4"
+        title="Presentation du club SFG Savate Lyon"
+        loading="lazy"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</section>
 
 <section class="highlight results">
   <div class="container">
