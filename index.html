@@ -62,12 +62,63 @@
       opacity: 1;
     }
 
-
     .nav {
       display: flex;
       align-items: center;
       justify-content: flex-end;
       gap: 1rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      border: 1px solid #1e1e1e;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      position: relative;
+      width: 20px;
+      height: 2px;
+      background: #fff;
+      display: block;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .menu-toggle span::before,
+    .menu-toggle span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 20px;
+      height: 2px;
+      background: #fff;
+      transition: transform 0.2s ease;
+    }
+
+    .menu-toggle span::before {
+      top: -6px;
+    }
+
+    .menu-toggle span::after {
+      top: 6px;
+    }
+
+    .menu-toggle.is-active span {
+      background: transparent;
+    }
+
+    .menu-toggle.is-active span::before {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .menu-toggle.is-active span::after {
+      transform: translateY(-6px) rotate(-45deg);
     }
     /* HERO */
     .hero {
@@ -341,6 +392,34 @@
         padding: 3rem 0 2.5rem;
       }
 
+      .hero-content {
+        position: relative;
+        padding: 1.5rem;
+        border-radius: 16px;
+        overflow: hidden;
+        background: rgba(11, 11, 11, 0.35);
+      }
+
+      .hero-content::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("./assets/img/boxeuse_sfg_transparency_comp.png") center 20% / cover no-repeat;
+        filter: blur(6px);
+        opacity: 0.45;
+        transform: scale(1.05);
+        z-index: 0;
+      }
+
+      .hero-content > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-figure-wrap {
+        display: none;
+      }
+
       .hero-figure {
         width: min(100%, 640px);
         transform: none;
@@ -361,6 +440,42 @@
         transform: none;
       }
     }
+
+    @media (max-width: 800px) {
+      .nav {
+        justify-content: space-between;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        flex-direction: column;
+        gap: 0;
+        background: #0b0b0b;
+        border-bottom: 1px solid #1e1e1e;
+        transform: translateY(-10px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+
+      .nav-links a {
+        padding: 0.9rem 1rem;
+        border-top: 1px solid #1e1e1e;
+      }
+
+      .nav-links.is-open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
   </style>
 </head>
 
@@ -368,7 +483,10 @@
 
 <header>
   <div class="container nav">
-    <nav class="nav-links">
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="primaryNav">
+      <span></span>
+    </button>
+    <nav class="nav-links" id="primaryNav">
       <a href="#">Le club</a>
       <a href="#">Photos</a>
       <a href="#">Disciplines</a>
@@ -532,6 +650,28 @@
 </footer>
 
 <script>
+ (function () {
+  const toggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav-links");
+
+  if (!toggle || !nav) return;
+
+  const setState = (isOpen) => {
+    nav.classList.toggle("is-open", isOpen);
+    toggle.classList.toggle("is-active", isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  };
+
+  toggle.addEventListener("click", () => {
+    const isOpen = nav.classList.contains("is-open");
+    setState(!isOpen);
+  });
+
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setState(false));
+  });
+ })();
+
  (function () {
   const now = new Date();
   const today = now.getDay(); // 0 = dimanche
