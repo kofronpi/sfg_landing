@@ -9,6 +9,7 @@
   <style>
     :root {
       --red: #e10600;
+      --red-soft: #ff5a4f;
       --black: #0b0b0b;
       --gray: #f3f3f3;
       --max-width: 1200px;
@@ -295,6 +296,75 @@
       background: var(--gray);
     }
 
+    .sfg-words {
+      background: #fff;
+    }
+
+    .sfg-words-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .sfg-words-content {
+      max-width: 560px;
+    }
+
+    .sfg-words-media {
+      border-radius: 14px;
+      border: 1px solid #e5e5e5;
+      background: #fff;
+      padding: 0.4rem;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .sfg-words-spacer {
+      min-height: 1px;
+    }
+
+    .sfg-words-media img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .sfg-words-title {
+      margin-bottom: 1rem;
+    }
+
+    .sfg-words-stats {
+      list-style: disc;
+      display: grid;
+      gap: 0.6rem;
+      margin-bottom: 1.2rem;
+      padding-left: 1.1rem;
+      font-weight: 700;
+      color: var(--red-soft);
+      font-style: italic;
+    }
+
+    .sfg-words-details {
+      list-style: disc;
+      display: grid;
+      gap: 0.5rem;
+      padding-left: 1.1rem;
+      color: #222;
+    }
+
+    @media (max-width: 900px) {
+      .sfg-words-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sfg-words-spacer {
+        display: none;
+      }
+    }
+
     .video-section {
       background: #fff;
     }
@@ -371,6 +441,21 @@
       border-left: 4px solid var(--red);
     }
 
+    .fb-feed {
+      width: 100%;
+      height: 680px;
+      border: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    @media (max-width: 700px) {
+      .fb-feed {
+        height: 520px;
+      }
+    }
+
     /* CTA FINAL */
     .cta-section {
       background: var(--black);
@@ -378,9 +463,18 @@
       text-align: center;
     }
 
+    .cta-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+      gap: 2rem;
+      align-items: start;
+      margin-top: 2rem;
+      text-align: left;
+    }
+
     form {
       max-width: 420px;
-      margin: 2rem auto 0;
+      margin: 0;
       display: grid;
       gap: 1rem;
     }
@@ -401,6 +495,20 @@
       color: #fff;
       font-weight: 600;
       cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .cta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-section {
+        text-align: center;
+      }
+
+      form {
+        margin: 0 auto;
+      }
     }
 
     /* FOOTER */
@@ -534,6 +642,7 @@
       <a href="#">Disciplines</a>
       <a href="#">Horaires</a>
       <a href="#">Inscription</a>
+      <a href="#actualites">Actualités</a>
       <a href="#">Contact</a>
     </nav>
   </div>
@@ -635,47 +744,70 @@
   </div>
 </section>
 
-<section class="highlight results">
-  <div class="container">
-    <h2>Derniers résultats</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Championnat de France Espoirs</h3>
-        <p>🥇 Jade - Championne de France Espoir F60 en Savate Boxe Française</p>
+<section class="sfg-words">
+  <div class="container sfg-words-layout">
+    <div class="sfg-words-content">
+      <h2 class="sfg-words-title">Le SFG en quelques mots</h2>
+      <div class="sfg-words-media">
+        <img src="./assets/img/boris.jpg" alt="SFG Savate en action">
       </div>
-      <div class="card">
-        <h3>Titis Parisiens 2026</h3>
-        <p>🥈 Pak – Canne de Combat par Équipe -  2ème place Pak & VICCB</p>
-      </div>
-      <div class="card">
-        <h3>Régional Combat AURA</h3>
-        <p>🥇 Mohamed - Finale régionale 2ème série SBF - M75 </p>
-      </div>
+      <ul class="sfg-words-stats">
+        <li>7 titres de champion du Monde</li>
+        <li>6 titres de champion d'Europe</li>
+        <li>43 titres de champion de France</li>
+        <li>9 titres de vainqueur de l’Open de France</li>
+        <li>2 médailles d'argent aux World Combat Games 2013</li>
+      </ul>
+      <ul class="sfg-words-details">
+        <li>Activités : Savate Boxe Française, Savate forme, Canne de Combat et Bâton.</li>
+        <li>Un club adapté à vos exigences (débutants, loisirs, confirmés, compétiteurs, enfants et adultes), ouvert à toutes et à tous.</li>
+        <li>Plus de 200 licenciés.</li>
+        <li>2 salles d'entraînements et 2 fois plus de cours.</li>
+        <li>Un encadrement de qualité BEE3, BEE2, BEE1 et CQP animateur de Savate Boxe Française.</li>
+        <li>Participation à de nombreux stages et formations.</li>
+        <li>Préparation à la compétition.</li>
+        <li>Séances de préparation physique sous forme de circuit cross training.</li>
+      </ul>
     </div>
+    <div class="sfg-words-spacer" aria-hidden="true"></div>
   </div>
 </section>
 
-
-
-
-<section class="cta-section">
+<section class="cta-section" id="actualites">
   <div class="container">
-    <h2>Envie de découvrir le SFG ?</h2>
-    <p>Nous vous orientons vers le créneau le plus adapté à votre profil.</p>
+    <div class="cta-grid">
+      <div>
+        <h2 style="margin-bottom: 1rem;">Actualités</h2>
+        <iframe
+          class="fb-feed"
+          title="Actualités SFG Savate sur Facebook"
+          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057343214536&tabs=timeline&width=1200&height=680&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&locale=fr_FR"
+          scrolling="no"
+          frameborder="0"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          loading="lazy"
+          allowfullscreen="true"
+        ></iframe>
+      </div>
 
-    <form>
-      <input type="text" placeholder="Prénom" required>
-      <input type="email" placeholder="Email" required>
-      <input type="telephone" placeholder="Tél" required>
-      <select>
-        <option>Votre profil</option>
-        <option>Débutant</option>
-        <option>Loisir</option>
-        <option>Jeune</option>
-        <option>Compétiteur</option>
-      </select>
-      <button class="btn-grad">Être contacté</button>
-    </form>
+      <div>
+        <h2 style="margin-bottom: 0.6rem;">Envie de découvrir le SFG ?</h2>
+        <p style="margin-bottom: 1.5rem;">Nous vous orientons vers le créneau le plus adapté à votre profil.</p>
+        <form>
+          <input type="text" placeholder="Prénom" required>
+          <input type="email" placeholder="Email" required>
+          <input type="telephone" placeholder="Tél" required>
+          <select>
+            <option>Votre profil</option>
+            <option>Débutant</option>
+            <option>Loisir</option>
+            <option>Jeune</option>
+            <option>Compétiteur</option>
+          </select>
+          <button class="btn-grad">Être contacté</button>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
 
