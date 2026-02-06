@@ -212,6 +212,26 @@
       color: #fff;
     }
 
+    .btn-grad {background-image: linear-gradient(to right, #e52d27 0%, #b31217  51%, #e52d27  100%)}
+    .btn-grad {
+      padding: 15px 45px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color: white;
+      box-shadow: 0 0 12px #eee;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .btn-grad:hover {
+      background-position: right center; /* change the direction of the change here */
+      color: #fff;
+      text-decoration: none;
+    }
+
+    
     .btn-secondary {
       background: #fff;
       color: #111;
@@ -507,7 +527,7 @@
         Un club historique, inclusif et engagé dans la performance.
       </p>
       <div class="cta-group">
-        <a class="btn btn-primary">Faire un cours d’essai</a>
+        <a class="btn btn-primary btn-grad">Faire un cours d’essai</a>
         <a class="btn btn-secondary">Voir les disciplines</a>
       </div>
     </div>
