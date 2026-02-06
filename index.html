@@ -356,6 +356,10 @@
   transition: all 0.2s ease;
 }
 
+.spond-btn .label-short {
+  display: none;
+}
+
 @keyframes bounceX {
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(6px); }
@@ -469,6 +473,14 @@
         width: min(100%, 520px);
         transform: none;
       }
+
+      .spond-btn .label-full {
+        display: none;
+      }
+
+      .spond-btn .label-short {
+        display: inline;
+      }
     }
 
     @media (max-width: 800px) {
@@ -538,7 +550,7 @@
       </p>
       <div class="cta-group">
         <a class="btn btn-primary btn-grad">Faire un cours d’essai</a>
-        <a class="btn btn-secondary">Voir les disciplines</a>
+        <a class="btn btn-secondary" href="#pratiques">Voir les disciplines</a>
       </div>
     </div>
     <div class="hero-figure-wrap">
@@ -562,13 +574,14 @@
               rel="noopener"
               class="spond-btn"
       >
-        S’inscrire au cours sur Spond
+        <span class="label-full">S’inscrire au cours sur Spond</span>
+        <span class="label-short">S’inscrire</span>
       </a>
     </div>
   </div>
 </section>
 
-<section class="container">
+<section class="container" id="pratiques">
   <h2>Un club, plusieurs pratiques</h2>
   <p class="intro">Le SFG propose une pratique accessible à toutes et à tous, avec des parcours adaptés selon l’âge, les objectifs et le niveau.</p>
 
