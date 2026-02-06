@@ -582,15 +582,128 @@
     }
 
     /* FOOTER */
-    footer {
-      background: #111;
+    .footer {
+      font-size: 0.95rem;
+      color: #d3d3d3;
+    }
+
+    .footer-top {
+      background: radial-gradient(circle at top left, rgba(225, 6, 0, 0.2), transparent 55%), #0c0c0c;
+      color: #c7c7c7;
+      padding: 3.5rem 0 3rem;
+    }
+
+    .footer-top .container {
+      display: grid;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .footer-brand {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      width: 160px;
+    }
+
+    .footer-brand-text {
+      color: #b8b8b8;
+    }
+
+    .footer-hours {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 0.6rem;
+    }
+
+    .footer-hours-title {
       color: #fff;
-      padding: 2.5rem 1rem;
+      font-weight: 700;
+    }
+
+    .footer-list-title {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .footer-list-title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 60px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    .footer-list {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .footer-list-item {
+      display: grid;
+      gap: 0.3rem;
+    }
+
+    .footer-link {
+      color: #d6d6d6;
+    }
+
+    .footer-link:hover {
+      color: #fff;
+    }
+
+    .footer-map iframe {
+      width: 100%;
+      height: 220px;
+      border: 0;
+      border-radius: 10px;
+    }
+
+    .social-list {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.4rem;
+    }
+
+    .social-link {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
       font-size: 0.9rem;
     }
 
-    footer .grid {
-      gap: 2rem;
+    .footer-bottom {
+      background: #070707;
+      color: #9e9e9e;
+      padding: 1rem 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom a {
+      color: #cfcfcf;
+    }
+
+    @media (min-width: 900px) {
+      .footer-top .container {
+        grid-template-columns: 1.1fr 1fr 0.8fr;
+      }
+
+      .footer-map iframe {
+        height: 260px;
+      }
     }
 
     @media (max-width: 900px) {
@@ -895,26 +1008,53 @@
           </select>
           <button class="btn-grad">Être contacté</button>
         </form>
-        <img class="cta-logo" src="./assets/img/sfg_logo_blanc.png" alt="Logo SFG Savate">
       </div>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="container grid">
-    <div>
-      <strong>SFG Savate Lyon</strong>
-      <p>Club de Savate Boxe Française</p>
+<footer class="footer" id="contact">
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-brand">
+        <img class="footer-logo" src="./assets/img/sfg_logo_blanc.png" alt="Logo SFG Savate">
+        <p class="footer-brand-text">
+          Club Lyonnais de Savate Boxe Française, Savate Forme, Canne de Combat et Préparation Physique.
+        </p>
+      </div>
+
+      <div class="footer-list">
+        <div class="footer-list-title">Nous contacter</div>
+        <div class="footer-list-item">
+          <a class="footer-link" href="https://maps.app.goo.gl/hFuSgLeDwSfsWmwE6">40 rue de Gerland, 69007 Lyon</a>
+        </div>
+        <div class="footer-list-item footer-map">
+          <iframe
+            src="https://maps.google.fr/maps?f=q&source=s_q&hl=fr&geocode=&q=40+Rue+de+gerland,+Lyon&aq=&sll=45.740586,4.840553&sspn=0.006627,0.013937&ie=UTF8&hq=&hnear=40+Rue+de+Gerland,+69007+Lyon,+Rh%C3%B4ne,+Rh%C3%B4ne-Alpes&ll=45.740589,4.84055&spn=0.006627,0.013937&t=m&z=14&iwloc=A&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Plan SFG Savate"
+          ></iframe>
+        </div>
+        <div class="footer-list-item">
+          <a class="footer-link" href="tel:0662052080">06 62 05 20 80</a>
+        </div>
+      </div>
+
+      <div class="footer-list">
+        <div class="footer-list-title">Réseaux</div>
+        <div class="social-list">
+          <a class="social-link" href="https://www.facebook.com/p/SFG-Savate-100057343214536/" aria-label="Facebook">Fb</a>
+          <a class="social-link" href="https://www.instagram.com/sfg_savate/?hl=fr" aria-label="Instagram">Ig</a>
+        </div>
+      </div>
     </div>
-    <div>
-      <p>Horaires</p>
-      <p>Accès aux salles</p>
-      <p>Contact</p>
-    </div>
-    <div>
-      <p><a href="https://www.instagram.com/sfg_savate/?hl=en">Instagram</a></p>
-      <p><a href="https://www.facebook.com/p/SFG-Savate-100057343214536/">Facebook</a></p>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <div>&copy; 2026 SFG Savate.</div>
+      <div><a href="#">Mentions légales</a></div>
     </div>
   </div>
 </footer>
