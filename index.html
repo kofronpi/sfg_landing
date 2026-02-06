@@ -737,7 +737,7 @@ const planning = [
   const todayCourses = coursesForDay(today).filter(c => c.startMin > minutesNow);
 
   if (todayCourses.length > 0) {
-    html += "<strong>Prochains cours aujourd’hui :</strong>";
+    html += "<strong>Prochains cours aujourd’hui : </strong>";
     todayCourses.forEach(c => {
       html += `${c.name} — ${c.start}/${c.end} — ${c.place} — ${c.coach}<br>`;
     });
