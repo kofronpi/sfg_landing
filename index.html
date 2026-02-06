@@ -605,7 +605,7 @@
     }
 
     .footer-logo {
-      width: 160px;
+      width: min(240px, 80%);
     }
 
     .footer-brand-text {
@@ -1030,7 +1030,7 @@
         </div>
         <div class="footer-list-item footer-map">
           <iframe
-            src="https://maps.google.fr/maps?f=q&source=s_q&hl=fr&geocode=&q=40+Rue+de+gerland,+Lyon&aq=&sll=45.740586,4.840553&sspn=0.006627,0.013937&ie=UTF8&hq=&hnear=40+Rue+de+Gerland,+69007+Lyon,+Rh%C3%B4ne,+Rh%C3%B4ne-Alpes&ll=45.740589,4.84055&spn=0.006627,0.013937&t=m&z=14&iwloc=A&output=embed"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=4.834%2C45.737%2C4.848%2C45.744&layer=mapnik&marker=45.740589%2C4.84055"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             title="Plan SFG Savate"
@@ -1044,8 +1044,12 @@
       <div class="footer-list">
         <div class="footer-list-title">Réseaux</div>
         <div class="social-list">
-          <a class="social-link" href="https://www.facebook.com/p/SFG-Savate-100057343214536/" aria-label="Facebook">Fb</a>
-          <a class="social-link" href="https://www.instagram.com/sfg_savate/?hl=fr" aria-label="Instagram">Ig</a>
+          <a class="social-link" href="https://www.facebook.com/p/SFG-Savate-100057343214536/" aria-label="Facebook">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </a>
+          <a class="social-link" href="https://www.instagram.com/sfg_savate/?hl=fr" aria-label="Instagram">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </a>
         </div>
       </div>
     </div>
@@ -1211,6 +1215,8 @@ const planning = [
   document.getElementById("nextCourse").innerHTML = html;
 })();</script>
 
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 </body>
 </html>
