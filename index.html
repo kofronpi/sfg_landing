@@ -383,6 +383,22 @@
       background: url("./assets/img/next.png") center/contain no-repeat !important;
     }
 
+    .sfg-slider-cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.2rem;
+    }
+
+    .sfg-slider-cta .btn {
+      display: inline-block;
+    }
+
+    @media (min-width: 901px) {
+      .sfg-slider-cta {
+        margin-top: 1.8rem;
+      }
+    }
+
     .sfg-slider-dots {
       display: none;
     }
@@ -948,27 +964,32 @@
         <li>Séances de préparation physique sous forme de circuit cross training.</li>
       </ul>
     </div>
-    <div class="sfg-slider" aria-label="Galerie SFG">
-      <ul class="sfg-slides">
-        <li class="is-active">
-          <img src="./assets/img/78809598_1473090879507314_1237423951068528640_o.jpg" alt="Sara Tebbakh finale monde 2019">
-        </li>
-        <li>
-          <img src="./assets/img/78998739_1475685192581216_7145238461279109120_o.jpg" alt="Amîn El Baz gala la Motte Servolex 2019">
-        </li>
-        <li>
-          <img src="./assets/img/79144015_1473091262840609_1980790834756321280_o.jpg" alt="Sara Tebbakh finale monde 2019">
-        </li>
-        <li>
-          <img src="./assets/img/78785460_1475685395914529_3160125825592852480_o.jpg" alt="Amîn El Baz gala la Motte Servolex 2019">
-        </li>
-        <li>
-          <img src="./assets/img/SAAD_FINALE_JUNIOR2019-e1567617562808.jpg" alt="Saad Bellemoud finale junior 2019">
-        </li>
-      </ul>
-      <div class="sfg-slider-controls" aria-hidden="true">
-        <button class="sfg-prev" type="button" aria-label="Photo précédente">‹</button>
-        <button class="sfg-next" type="button" aria-label="Photo suivante">›</button>
+    <div class="sfg-slider-wrap">
+      <div class="sfg-slider" aria-label="Galerie SFG">
+        <ul class="sfg-slides">
+          <li class="is-active">
+            <img src="./assets/img/78809598_1473090879507314_1237423951068528640_o.jpg" alt="Sara Tebbakh finale monde 2019">
+          </li>
+          <li>
+            <img src="./assets/img/78998739_1475685192581216_7145238461279109120_o.jpg" alt="Amîn El Baz gala la Motte Servolex 2019">
+          </li>
+          <li>
+            <img src="./assets/img/79144015_1473091262840609_1980790834756321280_o.jpg" alt="Sara Tebbakh finale monde 2019">
+          </li>
+          <li>
+            <img src="./assets/img/78785460_1475685395914529_3160125825592852480_o.jpg" alt="Amîn El Baz gala la Motte Servolex 2019">
+          </li>
+          <li>
+            <img src="./assets/img/SAAD_FINALE_JUNIOR2019-e1567617562808.jpg" alt="Saad Bellemoud finale junior 2019">
+          </li>
+        </ul>
+        <div class="sfg-slider-controls" aria-hidden="true">
+          <button class="sfg-prev" type="button" aria-label="Photo précédente">‹</button>
+          <button class="sfg-next" type="button" aria-label="Photo suivante">›</button>
+        </div>
+      </div>
+      <div class="sfg-slider-cta">
+        <a class="btn btn-primary btn-grad" href="#actualites">Cours d'essai gratuit</a>
       </div>
     </div>
   </div>
