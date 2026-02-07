@@ -1004,6 +1004,8 @@
           class="fb-feed"
           title="Actualités SFG Savate sur Facebook"
           src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057343214536&tabs=timeline&width=1200&height=680&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&locale=fr_FR"
+          data-src-desktop="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057343214536&tabs=timeline&width=1200&height=680&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&locale=fr_FR"
+          data-src-mobile="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057343214536&tabs=timeline&height=680&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&locale=fr_FR"
           scrolling="no"
           frameborder="0"
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -1234,6 +1236,29 @@ const planning = [
 
   document.getElementById("nextCourse").innerHTML = html;
 })();</script>
+
+<script>
+(function () {
+  var iframe = document.querySelector(".fb-feed");
+  if (!iframe) return;
+
+  var media = window.matchMedia("(max-width: 700px)");
+
+  function updateFbSrc() {
+    var target = media.matches ? iframe.dataset.srcMobile : iframe.dataset.srcDesktop;
+    if (target && iframe.src !== target) {
+      iframe.src = target;
+    }
+  }
+
+  updateFbSrc();
+  if (media.addEventListener) {
+    media.addEventListener("change", updateFbSrc);
+  } else if (media.addListener) {
+    media.addListener(updateFbSrc);
+  }
+})();
+</script>
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
