@@ -583,6 +583,19 @@
       max-width: 420px;
     }
 
+    .cta-iframe-wrap {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 540 / 305;
+    }
+
+    .cta-iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
     @media (max-width: 900px) {
       .cta-grid {
         grid-template-columns: 1fr;
@@ -836,13 +849,13 @@
       <span></span>
     </button>
     <nav class="nav-links" id="primaryNav">
-      <a href="#">Le club</a>
+      <a href="#leclub">Le club</a>
       <a href="#">Photos</a>
-      <a href="#">Disciplines</a>
+      <a href="#pratiques">Disciplines</a>
       <a href="#">Horaires</a>
       <a href="#">Inscription</a>
       <a href="#actualites">Actualités</a>
-      <a href="#">Contact</a>
+      <a href="#cta-form">Contact</a>
     </nav>
   </div>
 </header>
@@ -857,7 +870,7 @@
         Un club historique, inclusif et engagé dans la performance, dans une ambiance conviviale !
       </p>
       <div class="cta-group">
-        <a class="btn btn-primary btn-grad">Cours d’essai gratuit</a>
+        <a class="btn btn-primary btn-grad" href="#cta-form">Cours d’essai gratuit</a>
       </div>
     </div>
     <div class="hero-figure-wrap">
@@ -926,7 +939,7 @@
 
 
 
-<section class="video-section">
+<section id="leclub" class="video-section">
   <div class="container">
     <h2>Présentation du club</h2>
     <p class="intro">Un aperçu du SFG, de l’ambiance et de nos entraînements.</p>
@@ -1014,23 +1027,10 @@
         ></iframe>
       </div>
 
-      <div class="cta-form-block">
+      <div id="cta-form" class="cta-form-block">
         <h2 style="margin-bottom: 0.6rem;">Envie de découvrir le SFG ?</h2>
-        <p style="margin-bottom: 1.5rem;">Nous vous orientons vers le créneau le plus adapté à votre profil.</p>
-        <form>
-          <input type="text" placeholder="Prénom" required>
-          <input type="email" placeholder="Email" required>
-          <input type="telephone" placeholder="Tél" required>
-          <select>
-            <option>Votre profil</option>
-            <option>Débutant</option>
-            <option>Loisir</option>
-            <option>Jeune</option>
-            <option>Compétiteur</option>
-          </select>
-          <button class="btn-grad">Être contacté</button>
-        </form>
-      </div>
+        <div class="cta-iframe-wrap">
+          <iframe width="540" height="705" src="https://902256e1.sibforms.com/serve/MUIFABFMMLj0a8EiEwyBomgcFD0vCtNRv9eRRyWj776tRjLXmiQ16am31UzZHtdb_WkkibSjBg-yEDhyfR5NK_a9yAVK12h40UyV57NL2dp3aJQX6UDKbiUgy4zg4ueE-qPvohfNdmav0oI0s9E7ovfwpK6aiwihlOzW2ooE0J7IOu3X2TCi37Qj9bZz5CzEF0StfBnxLqGFlWj7" frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe>      </div>
     </div>
   </div>
 </section>
