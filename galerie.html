@@ -597,9 +597,19 @@
       }
 
       .gallery figure {
-        height: clamp(240px, 58vw, 420px);
+        display: block;
+        height: auto;
         grid-column: 1 !important;
         grid-row: auto !important;
+        background: transparent;
+      }
+
+      .gallery img {
+        display: block;
+        width: 100%;
+        height: auto;
+        block-size: auto;
+        object-fit: contain;
       }
 
       .lb-nav {
