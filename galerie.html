@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Galerie photo du SFG Savate Lyon">
+  <meta name="description" content="Moments de convivialité, entraînements et compétitions : une galerie photos du club SFG Savate à Lyon">
   <title>Galerie - SFG Savate Lyon</title>
   <style>
     :root {
@@ -131,7 +131,7 @@
     .menu-toggle.is-active span::after { transform: translateY(-6px) rotate(-45deg); }
 
     .gallery-layout {
-      min-height: min(100vh, 1200px);
+      min-height: min(80vh, 1200px);
       display: grid;
       grid-template-columns: [sidebar-start] 5rem [sidebar-end main-start] 1fr [main-end];
       border-bottom: 1px solid #ececec;
@@ -345,6 +345,66 @@
       background: rgba(255, 255, 255, 0.26);
     }
 
+    .gallery-social-cta {
+      padding: 1.2rem 1rem 2rem;
+    }
+
+    .gallery-social-cta .container {
+      max-width: 760px;
+    }
+
+    .gallery-social-card {
+      border: 1px solid #ececec;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fff, #f9f9f9);
+      padding: 1rem 1.25rem;
+      display: grid;
+      justify-items: center;
+      gap: 0.85rem;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    .gallery-social-title {
+      font-size: 1rem;
+      color: #222;
+      font-weight: 600;
+    }
+
+    .gallery-social-list {
+      display: flex;
+      justify-content: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .gallery-social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-width: 150px;
+      padding: 0.58rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid #d8d8d8;
+      background: #fff;
+      color: #111;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .gallery-social-link ion-icon {
+      font-size: 1.1rem;
+    }
+
+    .gallery-social-link:hover,
+    .gallery-social-link:focus-visible {
+      border-color: color-mix(in srgb, var(--red) 60%, #d8d8d8 40%);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+    }
+
     .footer {
       font-size: 0.95rem;
       color: #d3d3d3;
@@ -545,6 +605,19 @@
       .lb-nav {
         display: none;
       }
+
+      .gallery-social-cta {
+        padding: 1rem 1rem 1.5rem;
+      }
+
+      .gallery-social-card {
+        padding: 0.9rem;
+      }
+
+      .gallery-social-link {
+        width: 100%;
+        min-width: 0;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -582,7 +655,7 @@
 <main class="gallery-layout">
   <section class="main" aria-label="Galerie photo">
     <h1>Galerie</h1>
-    <p class="intro">Moments de convivialité, entraînements et compétitions : retrouvez-toutes nos photos !  </p>
+    <p class="intro">Moments de convivialité, entraînements et compétitions : voici quelques photos emblématiques du club SFG Savate à Lyon !  </p>
 
     <div id="galleryGrid" class="gallery"></div>
 
@@ -590,6 +663,24 @@
     </div>
   </section>
 </main>
+
+<section class="gallery-social-cta" aria-label="Réseaux sociaux photo">
+  <div class="container">
+    <div class="gallery-social-card">
+      <p class="gallery-social-title">Retrouvez toutes nos photos sur :</p>
+      <div class="gallery-social-list">
+        <a class="gallery-social-link" href="https://www.facebook.com/p/SFG-Savate-100057343214536/" target="_blank" rel="noopener noreferrer" aria-label="Voir les photos sur Facebook">
+          <ion-icon name="logo-facebook"></ion-icon>
+          <span>Facebook</span>
+        </a>
+        <a class="gallery-social-link" href="https://www.instagram.com/sfg_savate/?hl=fr" target="_blank" rel="noopener noreferrer" aria-label="Voir les photos sur Instagram">
+          <ion-icon name="logo-instagram"></ion-icon>
+          <span>Instagram</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <div
   id="lightbox"
