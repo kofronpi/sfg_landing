@@ -1,0 +1,12 @@
+Redirect 301 /planning https://www.sfgsavate.com/planning.html
+Redirect 301 /galerie https://www.sfgsavate.com/galerie.html
+Redirect 301 /contact https://www.sfgsavate.com/index.html#cta-form
+Redirect 301 /cours https://www.sfgsavate.com/planning.html
+Redirect 301 /news https://www.sfgsavate.com/index.html#actualites
+Redirect 301 /entraineurs-du-sfg/ https://www.sfgsavate.com/planning.html
+Redirect 301 /trainers https://www.sfgsavate.com/planning.html
+Redirect 301 /sfg-savate-boxe-lyon/ https://www.sfgsavate.com/index.html#cta-form
+Redirect 301 /sfg-savate-boxe-lyon/inscription/ https://www.sfgsavate.com/
+Redirect 301 /page/4/ https://www.sfgsavate.com/
+
+ErrorDocument 404 /404.html
