@@ -1,694 +1,708 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Planning hebdomadaire des cours SFG Savate Lyon.">
-  <title>Planning des cours - SFG Savate Lyon</title>
-  <style>
-    :root {
-      --red: #e10600;
-      --black: #0b0b0b;
-      --max-width: 1200px;
-      --bg: #f4f1ea;
-      --text: #111;
-      --muted: #5a5a5a;
-      --line: #e3ddd2;
-      --card: #fff;
-      --chip: #e9f0f7;
-      --chip-text: #26496d;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Dosis', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.55;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-
-    .container {
-      max-width: var(--max-width);
-      margin: auto;
-      padding: 1rem;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      background: #0b0b0b;
-      border-bottom: 1px solid #1e1e1e;
-      z-index: 50;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 1rem;
-      position: relative;
-    }
-
-    .site-brand {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #fff;
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .nav-links a {
-      color: #fff;
-      opacity: 0.9;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible,
-    .nav-links a.is-active {
-      color: var(--red);
-      opacity: 1;
-    }
-
-    .menu-toggle {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 8px;
-      border: 1px solid #1e1e1e;
-      background: transparent;
-      cursor: pointer;
-    }
-
-    .menu-toggle span {
-      position: relative;
-      width: 20px;
-      height: 2px;
-      background: #fff;
-      display: block;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .menu-toggle span::before,
-    .menu-toggle span::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 20px;
-      height: 2px;
-      background: #fff;
-      transition: transform 0.2s ease;
-    }
-
-    .menu-toggle span::before { top: -6px; }
-    .menu-toggle span::after { top: 6px; }
-
-    .menu-toggle.is-active span { background: transparent; }
-    .menu-toggle.is-active span::before { transform: translateY(6px) rotate(45deg); }
-    .menu-toggle.is-active span::after { transform: translateY(-6px) rotate(-45deg); }
-
-    .hero {
-      background:
-        radial-gradient(circle at top right, rgba(27, 58, 91, 0.23), transparent 58%),
-        linear-gradient(120deg, #f5efe6 0%, #ece4d8 100%);
-      border-bottom: 1px solid #ddd4c7;
-    }
-
-    .hero .container {
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-    }
-
-    .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      line-height: 1.12;
-      margin-bottom: 0.6rem;
-    }
-
-    .hero p {
-      color: #2e2e2e;
-      max-width: 75ch;
-    }
-
-    .planning {
-      padding: 2rem 0 3rem;
-    }
-
-    .planning-legend-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.8rem 1rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .planning-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem 1.2rem;
-      padding: 0.75rem 0.9rem;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: #fff;
-    }
-
-    .legend-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #2f2f2f;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .planning-legend-action {
-      margin-left: auto;
-      white-space: nowrap;
-    }
-
-    .spond-btn {
-      display: inline-block;
-      padding: 0.5rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      background: #eef5ff;
-      color: #1d6fd1;
-      border: 2px solid #1d6fd1;
-      transition: all 0.2s ease;
-    }
-
-    .spond-btn .label-short {
-      display: none;
-    }
-
-    .planning-grid {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 1rem;
-      align-items: start;
-    }
-
-    .day-column {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      overflow: hidden;
-      min-height: 220px;
-    }
-
-    .day-head {
-      background: #f8f5ef;
-      border-bottom: 1px solid var(--line);
-      padding: 0.7rem 0.85rem;
-      font-weight: 700;
-      font-size: 1rem;
-    }
-
-    .day-list {
-      list-style: none;
-      padding: 0.75rem;
-      display: grid;
-      gap: 0.65rem;
-    }
-
-    .slot {
-      border: 1px solid #d7e0ea;
-      border-radius: 10px;
-      background: #fbfdff;
-      padding: 0.65rem;
-      display: grid;
-      gap: 0.3rem;
-    }
-
-    .slot-head {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-
-    .place-dot {
-      width: 0.65rem;
-      height: 0.65rem;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .place-dot.place-bd {
-      background: #1d6fd1;
-    }
-
-    .place-dot.place-sa {
-      background: #d45700;
-    }
-
-    .slot-time {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: #4c647b;
-      font-weight: 700;
-    }
-
-    .slot-name {
-      font-weight: 700;
-      line-height: 1.25;
-    }
-
-    .slot-level {
-      display: inline-flex;
-      width: fit-content;
-      border-radius: 999px;
-      padding: 0.12rem 0.58rem;
-      background: var(--chip);
-      color: var(--chip-text);
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-
-    .slot-meta {
-      font-size: 0.84rem;
-      color: var(--muted);
-      line-height: 1.35;
-    }
-
-    .empty {
-      color: #9c9c9c;
-      font-size: 0.86rem;
-      border: 1px dashed #d8d8d8;
-      border-radius: 10px;
-      padding: 0.7rem;
-      text-align: center;
-      background: #fcfcfc;
-    }
-
-    .footer {
-      font-size: 0.95rem;
-      color: #d3d3d3;
-    }
-
-    .footer-top {
-      background: radial-gradient(circle at top left, rgba(225, 6, 0, 0.2), transparent 55%), #0c0c0c;
-      color: #c7c7c7;
-      padding: 3.5rem 0 3rem;
-    }
-
-    .footer-top .container {
-      display: grid;
-      gap: 2rem;
-      align-items: start;
-    }
-
-    .footer-brand {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .footer-logo {
-      width: min(240px, 80%);
-    }
-
-    .footer-brand-text {
-      color: #b8b8b8;
-    }
-
-    .footer-list-title {
-      color: #fff;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      position: relative;
-      padding-bottom: 0.5rem;
-    }
-
-    .footer-list-title::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 60px;
-      height: 2px;
-      background: var(--red);
-    }
-
-    .footer-list {
-      display: grid;
-      gap: 0.8rem;
-    }
-
-    .footer-list-item {
-      display: grid;
-      gap: 0.3rem;
-    }
-
-    .footer-link {
-      color: #d6d6d6;
-    }
-
-    .footer-link:hover,
-    .footer-link:focus-visible {
-      color: #fff;
-    }
-
-    .footer-map iframe {
-      width: 100%;
-      height: 220px;
-      border: 0;
-      border-radius: 10px;
-    }
-
-    .social-list {
-      display: flex;
-      gap: 0.8rem;
-      margin-top: 0.4rem;
-    }
-
-    .social-link {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-    }
-
-    .footer-bottom {
-      background: #070707;
-      color: #9e9e9e;
-      padding: 1rem 0;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    .footer-bottom a {
-      color: #cfcfcf;
-    }
-
-    @media (min-width: 900px) {
-      .footer-top .container {
-        grid-template-columns: 1.1fr 1fr 0.8fr;
-      }
-
-      .footer-map iframe {
-        height: 260px;
-      }
-    }
-
-    @media (max-width: 1120px) {
-      .planning-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 900px) {
-      .nav {
-        justify-content: space-between;
-      }
-
-      .site-brand {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: inline-flex;
-      }
-
-      .nav-links {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        left: 0;
-        flex-direction: column;
-        gap: 0;
-        background: #0b0b0b;
-        border-bottom: 1px solid #1e1e1e;
-        transform: translateY(-10px);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease, transform 0.2s ease;
-      }
-
-      .nav-links a {
-        padding: 0.9rem 1rem;
-        border-top: 1px solid #1e1e1e;
-      }
-
-      .nav-links.is-open {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .planning-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .planning-legend-action {
-        margin-left: 0;
-      }
-
-      .spond-btn .label-full {
-        display: none;
-      }
-
-      .spond-btn .label-short {
-        display: inline;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Planning hebdomadaire des cours SFG Savate Lyon.">
+    <title>Planning des cours - SFG Savate Lyon</title>
+    <style>
+        :root {
+            --red: #e10600;
+            --black: #0b0b0b;
+            --max-width: 1200px;
+            --bg: #f4f1ea;
+            --text: #111;
+            --muted: #5a5a5a;
+            --line: #e3ddd2;
+            --card: #fff;
+            --chip: #e9f0f7;
+            --chip-text: #26496d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Dosis', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.55;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 1rem;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background: #0b0b0b;
+            border-bottom: 1px solid #1e1e1e;
+            z-index: 50;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .site-brand {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+            .nav-links a {
+                color: #fff;
+                opacity: 0.9;
+            }
+
+                .nav-links a:hover,
+                .nav-links a:focus-visible,
+                .nav-links a.is-active {
+                    color: var(--red);
+                    opacity: 1;
+                }
+
+        .menu-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            border: 1px solid #1e1e1e;
+            background: transparent;
+            cursor: pointer;
+        }
+
+            .menu-toggle span {
+                position: relative;
+                width: 20px;
+                height: 2px;
+                background: #fff;
+                display: block;
+                transition: transform 0.2s ease, opacity 0.2s ease;
+            }
+
+                .menu-toggle span::before,
+                .menu-toggle span::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    width: 20px;
+                    height: 2px;
+                    background: #fff;
+                    transition: transform 0.2s ease;
+                }
+
+                .menu-toggle span::before {
+                    top: -6px;
+                }
+
+                .menu-toggle span::after {
+                    top: 6px;
+                }
+
+            .menu-toggle.is-active span {
+                background: transparent;
+            }
+
+                .menu-toggle.is-active span::before {
+                    transform: translateY(6px) rotate(45deg);
+                }
+
+                .menu-toggle.is-active span::after {
+                    transform: translateY(-6px) rotate(-45deg);
+                }
+
+        .hero {
+            background: radial-gradient(circle at top right, rgba(27, 58, 91, 0.23), transparent 58%), linear-gradient(120deg, #f5efe6 0%, #ece4d8 100%);
+            border-bottom: 1px solid #ddd4c7;
+        }
+
+            .hero .container {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.8rem, 4vw, 2.6rem);
+                line-height: 1.12;
+                margin-bottom: 0.6rem;
+            }
+
+            .hero p {
+                color: #2e2e2e;
+                max-width: 75ch;
+            }
+
+        .planning {
+            padding: 2rem 0 3rem;
+        }
+
+        .planning-legend-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .planning-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.2rem;
+            padding: 0.75rem 0.9rem;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2f2f2f;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .planning-legend-action {
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        .spond-btn {
+            display: inline-block;
+            padding: 0.5rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            background: #eef5ff;
+            color: #1d6fd1;
+            border: 2px solid #1d6fd1;
+            transition: all 0.2s ease;
+        }
+
+            .spond-btn .label-short {
+                display: none;
+            }
+
+        .planning-grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .day-column {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            overflow: hidden;
+            min-height: 220px;
+        }
+
+        .day-head {
+            background: #f8f5ef;
+            border-bottom: 1px solid var(--line);
+            padding: 0.7rem 0.85rem;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .day-list {
+            list-style: none;
+            padding: 0.75rem;
+            display: grid;
+            gap: 0.65rem;
+        }
+
+        .slot {
+            border: 1px solid #d7e0ea;
+            border-radius: 10px;
+            background: #fbfdff;
+            padding: 0.65rem;
+            display: grid;
+            gap: 0.3rem;
+        }
+
+        .slot-head {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .place-dot {
+            width: 0.65rem;
+            height: 0.65rem;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+            .place-dot.place-bd {
+                background: #1d6fd1;
+            }
+
+            .place-dot.place-sa {
+                background: #d45700;
+            }
+
+        .slot-time {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #4c647b;
+            font-weight: 700;
+        }
+
+        .slot-name {
+            font-weight: 700;
+            line-height: 1.25;
+        }
+
+        .slot-level {
+            display: inline-flex;
+            width: fit-content;
+            border-radius: 999px;
+            padding: 0.12rem 0.58rem;
+            background: var(--chip);
+            color: var(--chip-text);
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .slot-meta {
+            font-size: 0.84rem;
+            color: var(--muted);
+            line-height: 1.35;
+        }
+
+        .empty {
+            color: #9c9c9c;
+            font-size: 0.86rem;
+            border: 1px dashed #d8d8d8;
+            border-radius: 10px;
+            padding: 0.7rem;
+            text-align: center;
+            background: #fcfcfc;
+        }
+
+        .footer {
+            font-size: 0.95rem;
+            color: #d3d3d3;
+        }
+
+        .footer-top {
+            background: radial-gradient(circle at top left, rgba(225, 6, 0, 0.2), transparent 55%), #0c0c0c;
+            color: #c7c7c7;
+            padding: 3.5rem 0 3rem;
+        }
+
+            .footer-top .container {
+                display: grid;
+                gap: 2rem;
+                align-items: start;
+            }
+
+        .footer-brand {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            width: min(240px, 80%);
+        }
+
+        .footer-brand-text {
+            color: #b8b8b8;
+        }
+
+        .footer-list-title {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+            .footer-list-title::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 60px;
+                height: 2px;
+                background: var(--red);
+            }
+
+        .footer-list {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .footer-list-item {
+            display: grid;
+            gap: 0.3rem;
+        }
+
+        .footer-link {
+            color: #d6d6d6;
+        }
+
+            .footer-link:hover,
+            .footer-link:focus-visible {
+                color: #fff;
+            }
+
+        .footer-map iframe {
+            width: 100%;
+            height: 220px;
+            border: 0;
+            border-radius: 10px;
+        }
+
+        .social-list {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.4rem;
+        }
+
+        .social-link {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .footer-bottom {
+            background: #070707;
+            color: #9e9e9e;
+            padding: 1rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+            .footer-bottom a {
+                color: #cfcfcf;
+            }
+
+        @media (min-width: 900px) {
+            .footer-top .container {
+                grid-template-columns: 1.1fr 1fr 0.8fr;
+            }
+
+            .footer-map iframe {
+                height: 260px;
+            }
+        }
+
+        @media (max-width: 1120px) {
+            .planning-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 900px) {
+            .nav {
+                justify-content: space-between;
+            }
+
+            .site-brand {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: inline-flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                flex-direction: column;
+                gap: 0;
+                background: #0b0b0b;
+                border-bottom: 1px solid #1e1e1e;
+                transform: translateY(-10px);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s ease, transform 0.2s ease;
+            }
+
+                .nav-links a {
+                    padding: 0.9rem 1rem;
+                    border-top: 1px solid #1e1e1e;
+                }
+
+                .nav-links.is-open {
+                    transform: translateY(0);
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+        }
+
+        @media (max-width: 760px) {
+            .planning-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .planning-legend-action {
+                margin-left: 0;
+            }
+
+            .spond-btn .label-full {
+                display: none;
+            }
+
+            .spond-btn .label-short {
+                display: inline;
+            }
+        }
+    </style>
 </head>
 <body>
-<header>
-  <div class="container nav">
-    <a class="site-brand" href="./index.html">Club SFG Savate Lyon</a>
-    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="primaryNav">
-      <span></span>
-    </button>
-    <nav class="nav-links" id="primaryNav">
-      <a href="./index.html#leclub">Le club</a>
-      <a href="./galerie.html">Galerie</a>
-      <a href="./index.html#pratiques">Disciplines</a>
-      <a class="is-active" href="./planning.html">Horaires</a>
-      <a href="./index.html#cta-form">Inscription</a>
-      <a href="./index.html#actualites">Actualités</a>
-      <a href="./index.html#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-  <section class="hero">
-    <div class="container">
-      <h1>Planning hebdomadaire des cours du SFG Savate à Lyon</h1>
-    </div>
-  </section>
-
-  <section class="planning" aria-label="Planning hebdomadaire">
-    <div class="container">
-      <div class="planning-legend-bar">
-        <div class="planning-legend" aria-label="Légende des lieux">
-          <div class="legend-item"><span class="place-dot place-bd" aria-hidden="true"></span>Gymnase Benjamin Delessert Lyon 7</div>
-          <div class="legend-item"><span class="place-dot place-sa" aria-hidden="true"></span>Gymnase Salvador Allendé, Saint-Fons</div>
+    <header>
+        <div class="container nav">
+            <a class="site-brand" href="./index.html">Club SFG Savate Lyon</a>
+            <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="primaryNav">
+                <span></span>
+            </button>
+            <nav class="nav-links" id="primaryNav">
+                <a href="./index.html#leclub">Le club</a>
+                <a href="./galerie.html">Galerie</a>
+                <a href="./index.html#pratiques">Disciplines</a>
+                <a class="is-active" href="./planning.html">Horaires</a>
+                <a href="./Fiche_Inscription_SFG_2026_2027_.pdf">Adhésion 26/27</a>
+                <a href="./index.html#actualites">Actualités</a>
+                <a href="./index.html#contact">Contact</a>
+            </nav>
         </div>
-        <div class="planning-legend-action">
-          <a
-            href="https://spond.com/client/groups/EF32BF04991C4377A2DBEC0D9B5D5268"
-            target="_blank"
-            rel="noopener"
-            class="spond-btn"
-          >
-            <span class="label-full">S’inscrire au cours sur Spond</span>
-            <span class="label-short">S’inscrire</span>
-          </a>
-        </div>
-      </div>
-      <div id="planningGrid" class="planning-grid"></div>
-    </div>
-  </section>
-</main>
+    </header>
 
-<footer class="footer" id="contact">
-  <div class="footer-top">
-    <div class="container">
-      <div class="footer-brand">
-        <img class="footer-logo" src="./assets/img/sfg_logo_blanc.png" alt="Logo SFG Savate">
-        <p class="footer-brand-text">
-          Club Lyonnais de Savate Boxe Française, Savate Forme, Canne de Combat et Préparation Physique.
-        </p>
-      </div>
-
-      <div class="footer-list">
-        <div class="footer-list-title">Nous contacter</div>
-        <div class="footer-list-item">
-          <a class="footer-link" href="https://maps.app.goo.gl/hFuSgLeDwSfsWmwE6">40 rue de Gerland, 69007 Lyon</a>
-        </div>
-        <div class="footer-list-item footer-map">
-          <iframe
-            src="https://www.openstreetmap.org/export/embed.html?bbox=4.834%2C45.737%2C4.848%2C45.744&layer=mapnik&marker=45.740589%2C4.84055"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Plan SFG Savate"
-          ></iframe>
-        </div>
-        <div class="footer-list-item">
-          <a class="footer-link" href="tel:0662052080">06 62 05 20 80 - Franck</a>
-        </div>
-      </div>
-
-      <div class="footer-list">
-        <div class="footer-list-title">Réseaux</div>
-        <div class="social-list">
-          <a class="social-link" href="https://www.facebook.com/p/SFG-Savate-100057343214536/" aria-label="Facebook">
-            <ion-icon name="logo-facebook"></ion-icon>
-          </a>
-          <a class="social-link" href="https://www.instagram.com/sfg_savate/?hl=fr" aria-label="Instagram">
-            <ion-icon name="logo-instagram"></ion-icon>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <div class="container">
-      <div>&copy; 2026 SFG Savate.</div>
-      <div><a href="./mentions-legales.html">Mentions légales</a></div>
-    </div>
-  </div>
-</footer>
-
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script>
-  (function () {
-    const toggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.nav-links');
-
-    if (!toggle || !nav) return;
-
-    const setState = (isOpen) => {
-      nav.classList.toggle('is-open', isOpen);
-      toggle.classList.toggle('is-active', isOpen);
-      toggle.setAttribute('aria-expanded', String(isOpen));
-    };
-
-    toggle.addEventListener('click', () => {
-      const isOpen = nav.classList.contains('is-open');
-      setState(!isOpen);
-    });
-
-    nav.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => setState(false));
-    });
-  })();
-
-  const planning = [
-    { day: 1, start: "19:30", end: "21:00", name: "Boxe Anglaise", place: "Gymnase Salvador Allendé, Saint-Fons", coach: "Matthieu", level: "Tous publics" },
-
-    { day: 2, start: "18:00", end: "19:00", name: "Savate BF Ados (12/15ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Matthieu", level: "Ados 12-15 ans" },
-    { day: 2, start: "18:00", end: "19:00", name: "Canne de combat", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Gérald Lamotte", level: "Tous publics" },
-    { day: 2, start: "18:45", end: "20:30", name: "Savate BF Débutants/Intermédiaires", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Matthieu/Eddy Guéraud", level: "Débutants/Intermédiaires" },
-    { day: 2, start: "19:00", end: "20:15", name: "Savate Forme", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Gérald Lamotte", level: "Tous publics" },
-    { day: 2, start: "20:15", end: "21:45", name: "Savate BF Confirmés", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Confirmés" },
-
-    { day: 3, start: "14:00", end: "15:00", name: "Savate BF Enfants (7/11ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Enfants 7-11 ans" },
-    { day: 3, start: "15:00", end: "16:00", name: "Savate BF Ados (12/15ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Ados 12-15 ans" },
-    { day: 3, start: "19:00", end: "20:00", name: "Canne de combat Débutants", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Pierre-Alexandre  Kofron", level: "Débutants" },
-    { day: 3, start: "20:00", end: "21:30", name: "Prépa Physique & Technico-Tactique", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Matthieu", level: "Intermédiaires/Confirmés" },
-
-    { day: 4, start: "18:00", end: "19:00", name: "Préparation physique", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Tous publics" },
-    { day: 4, start: "20:00", end: "21:30", name: "Savate BF", place: "Gymnase Salvador Allendé, Saint-Fons", coach: "Franck Meneroud", level: "Tous publics" },
-
-    { day: 5, start: "19:00", end: "20:15", name: "Savate BF Débutants", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Débutants" },
-    { day: 5, start: "20:15", end: "21:45", name: "Savate BF Confirmés", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Confirmés" },
-
-    { day: 6, start: "10:00", end: "11:00", name: "Savate BF Enfants (7/11ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Enfants 7-11 ans" },
-    { day: 6, start: "11:00", end: "12:00", name: "Savate BF Ados (12/15ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Ados 12-15 ans" },
-    { day: 6, start: "12:00", end: "13:00", name: "Savate BF Compétiteurs", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Compétiteurs" }
-  ];
-
-  const dayNames = {
-    1: 'Lundi',
-    2: 'Mardi',
-    3: 'Mercredi',
-    4: 'Jeudi',
-    5: 'Vendredi',
-    6: 'Samedi'
-  };
-
-  function minutes(time) {
-    const [h, m] = time.split(':').map(Number);
-    return h * 60 + m;
-  }
-
-  function placeClass(place) {
-    return place.includes('Salvador Allendé') ? 'place-sa' : 'place-bd';
-  }
-
-  function renderPlanning() {
-    const root = document.getElementById('planningGrid');
-    if (!root) return;
-
-    for (let day = 1; day <= 6; day += 1) {
-      const list = planning
-        .filter((item) => item.day === day)
-        .sort((a, b) => minutes(a.start) - minutes(b.start));
-
-      const items = list.length
-        ? list.map((item) => `
-          <li class="slot">
-            <div class="slot-head">
-              <span class="place-dot ${placeClass(item.place)}" aria-hidden="true"></span>
-              <div class="slot-time">${item.start} - ${item.end}</div>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Planning hebdomadaire des cours du SFG Savate à Lyon</h1>
             </div>
-            <div class="slot-name">${item.name}</div>
-            ${item.level ? `<div class="slot-level">${item.level}</div>` : ''}
-            <div class="slot-meta">${item.coach}</div>
-          </li>
-        `).join('')
-        : '<li class="empty">Aucun cours</li>';
+        </section>
 
-      root.insertAdjacentHTML('beforeend', `
-        <article class="day-column" aria-label="${dayNames[day]}">
-          <h2 class="day-head">${dayNames[day]}</h2>
-          <ul class="day-list">${items}</ul>
-        </article>
-      `);
-    }
-  }
+        <section class="planning" aria-label="Planning hebdomadaire">
+            <div class="container">
+                <div class="planning-legend-bar">
+                    <div class="planning-legend" aria-label="Légende des lieux">
+                        <div class="legend-item"><span class="place-dot place-bd" aria-hidden="true"></span>Gymnase Benjamin Delessert Lyon 7</div>
+                        <div class="legend-item"><span class="place-dot place-sa" aria-hidden="true"></span>Gymnase Salvador Allendé, Saint-Fons</div>
+                    </div>
+                    <div class="planning-legend-action">
+                        <a href="https://spond.com/client/groups/EF32BF04991C4377A2DBEC0D9B5D5268"
+                           target="_blank"
+                           rel="noopener"
+                           class="spond-btn">
+                            <span class="label-full">S’inscrire au cours sur Spond</span>
+                            <span class="label-short">S’inscrire</span>
+                        </a>
+                    </div>
+                </div>
+                <div id="planningGrid" class="planning-grid"></div>
+            </div>
+        </section>
+    </main>
 
-  renderPlanning();
-</script>
+    <footer class="footer" id="contact">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-brand">
+                    <img class="footer-logo" src="./assets/img/sfg_logo_blanc.png" alt="Logo SFG Savate">
+                    <p class="footer-brand-text">
+                        Club Lyonnais de Savate Boxe Française, Savate Forme, Canne de Combat et Préparation Physique.
+                    </p>
+                </div>
+
+                <div class="footer-list">
+                    <div class="footer-list-title">Nous contacter</div>
+                    <div class="footer-list-item">
+                        <a class="footer-link" href="https://maps.app.goo.gl/hFuSgLeDwSfsWmwE6">40 rue de Gerland, 69007 Lyon</a>
+                    </div>
+                    <div class="footer-list-item footer-map">
+                        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=4.834%2C45.737%2C4.848%2C45.744&layer=mapnik&marker=45.740589%2C4.84055"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Plan SFG Savate"></iframe>
+                    </div>
+                    <div class="footer-list-item">
+                        <a class="footer-link" href="tel:0662052080">06 62 05 20 80 - Franck</a>
+                    </div>
+                </div>
+
+                <div class="footer-list">
+                    <div class="footer-list-title">Réseaux</div>
+                    <div class="social-list">
+                        <a class="social-link" href="https://www.facebook.com/p/SFG-Savate-100057343214536/" aria-label="Facebook">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                        <a class="social-link" href="https://www.instagram.com/sfg_savate/?hl=fr" aria-label="Instagram">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div>&copy; 2026 SFG Savate.</div>
+                <div><a href="./mentions-legales.html">Mentions légales</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        (function () {
+            const toggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.nav-links');
+
+            if (!toggle || !nav) return;
+
+            const setState = (isOpen) => {
+                nav.classList.toggle('is-open', isOpen);
+                toggle.classList.toggle('is-active', isOpen);
+                toggle.setAttribute('aria-expanded', String(isOpen));
+            };
+
+            toggle.addEventListener('click', () => {
+                const isOpen = nav.classList.contains('is-open');
+                setState(!isOpen);
+            });
+
+            nav.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => setState(false));
+            });
+        })();
+
+        const planning = [
+            { day: 1, start: "19:30", end: "21:00", name: "Boxe Anglaise", place: "Gymnase Salvador Allendé, Saint-Fons", coach: "Matthieu", level: "Tous publics" },
+
+            { day: 2, start: "18:00", end: "19:00", name: "Savate BF Ados (12/15ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Matthieu", level: "Ados 12-15 ans" },
+            { day: 2, start: "18:00", end: "19:00", name: "Canne de combat", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Gérald Lamotte", level: "Tous publics" },
+            { day: 2, start: "18:45", end: "20:30", name: "Savate BF Débutants/Intermédiaires", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Matthieu/Eddy Guéraud", level: "Débutants/Intermédiaires" },
+            { day: 2, start: "19:00", end: "20:15", name: "Savate Forme", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Gérald Lamotte", level: "Tous publics" },
+            { day: 2, start: "20:15", end: "21:45", name: "Savate BF Confirmés", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Confirmés" },
+
+            { day: 3, start: "14:00", end: "15:00", name: "Savate BF Enfants (7/11ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Enfants 7-11 ans" },
+            { day: 3, start: "15:00", end: "16:00", name: "Savate BF Ados (12/15ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Ados 12-15 ans" },
+            { day: 3, start: "19:00", end: "20:00", name: "Canne de combat Débutants", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Pierre-Alexandre  Kofron", level: "Débutants" },
+            { day: 3, start: "20:00", end: "21:30", name: "Prépa Physique & Technico-Tactique", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Matthieu", level: "Intermédiaires/Confirmés" },
+
+            { day: 4, start: "18:00", end: "19:00", name: "Préparation physique", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Tous publics" },
+            { day: 4, start: "20:00", end: "21:30", name: "Savate BF", place: "Gymnase Salvador Allendé, Saint-Fons", coach: "Franck Meneroud", level: "Tous publics" },
+
+            { day: 5, start: "19:00", end: "20:15", name: "Savate BF Débutants", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Débutants" },
+            { day: 5, start: "20:15", end: "21:45", name: "Savate BF Confirmés", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Confirmés" },
+
+            { day: 6, start: "10:00", end: "11:00", name: "Savate BF Enfants (7/11ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Enfants 7-11 ans" },
+            { day: 6, start: "11:00", end: "12:00", name: "Savate BF Ados (12/15ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Ados 12-15 ans" },
+            { day: 6, start: "12:00", end: "13:00", name: "Savate BF Compétiteurs", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud", level: "Compétiteurs" }
+        ];
+
+        const dayNames = {
+            1: 'Lundi',
+            2: 'Mardi',
+            3: 'Mercredi',
+            4: 'Jeudi',
+            5: 'Vendredi',
+            6: 'Samedi'
+        };
+
+        function minutes(time) {
+            const [h, m] = time.split(':').map(Number);
+            return h * 60 + m;
+        }
+
+        function placeClass(place) {
+            return place.includes('Salvador Allendé') ? 'place-sa' : 'place-bd';
+        }
+
+        function renderPlanning() {
+            const root = document.getElementById('planningGrid');
+            if (!root) return;
+
+            for (let day = 1; day <= 6; day += 1) {
+                const list = planning
+                    .filter((item) => item.day === day)
+                    .sort((a, b) => minutes(a.start) - minutes(b.start));
+
+                const items = list.length
+                    ? list.map((item) => `
+              <li class="slot">
+                <div class="slot-head">
+                  <span class="place-dot ${placeClass(item.place)}" aria-hidden="true"></span>
+                  <div class="slot-time">${item.start} - ${item.end}</div>
+                </div>
+                <div class="slot-name">${item.name}</div>
+                ${item.level ? `<div class="slot-level">${item.level}</div>` : ''}
+                <div class="slot-meta">${item.coach}</div>
+              </li>
+            `).join('')
+                    : '<li class="empty">Aucun cours</li>';
+
+                root.insertAdjacentHTML('beforeend', `
+            <article class="day-column" aria-label="${dayNames[day]}">
+              <h2 class="day-head">${dayNames[day]}</h2>
+              <ul class="day-list">${items}</ul>
+            </article>
+          `);
+            }
+        }
+
+        renderPlanning();
+    </script>
 </body>
 </html>

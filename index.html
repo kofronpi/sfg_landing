@@ -1,1280 +1,1280 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>SFG Savate Lyon – Club de Savate Boxe Française et disciplines associées pour tous, du loisir à la compétition</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Club de Savate Boxe Française, Savate Forme, Préparation Physique, Canne de Combat à Lyon. Loisirs, jeunes, compétition. Tous niveaux, tous âges, cours tous les jours." />
-
-  <style>
-    :root {
-      --red: #e10600;
-      --red-soft: #ff5a4f;
-      --black: #0b0b0b;
-      --gray: #f3f3f3;
-      --max-width: 1200px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Dosis', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    body {
-      background: #fff;
-      color: #111;
-      line-height: 1.55;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-
-    .container {
-      max-width: var(--max-width);
-      margin: auto;
-      padding: 1rem;
-    }
-
-    /* HEADER */
-    header {
-      position: sticky;
-      top: 0;
-      background: #0b0b0b; /* noir SFG */
-      border-bottom: 1px solid #1e1e1e;
-      z-index: 20;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .nav-links a {
-      color: #fff;
-      opacity: 0.9;
-    }
-
-    .nav-links a:hover {
-      color: var(--red);
-      opacity: 1;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 1rem;
-    }
-
-    .menu-toggle {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 8px;
-      border: 1px solid #1e1e1e;
-      background: transparent;
-      cursor: pointer;
-    }
-
-    .menu-toggle span {
-      position: relative;
-      width: 20px;
-      height: 2px;
-      background: #fff;
-      display: block;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .menu-toggle span::before,
-    .menu-toggle span::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 20px;
-      height: 2px;
-      background: #fff;
-      transition: transform 0.2s ease;
-    }
-
-    .menu-toggle span::before {
-      top: -6px;
-    }
-
-    .menu-toggle span::after {
-      top: 6px;
-    }
-
-    .menu-toggle.is-active span {
-      background: transparent;
-    }
-
-    .menu-toggle.is-active span::before {
-      transform: translateY(6px) rotate(45deg);
-    }
-
-    .menu-toggle.is-active span::after {
-      transform: translateY(-6px) rotate(-45deg);
-    }
-    /* HERO */
-    .hero {
-      background-image: linear-gradient(
-              115deg,
-              hsl(231deg 53% 34%) 0%,
-              hsl(231deg 45% 38%) 10%,
-              hsl(231deg 38% 43%) 20%,
-              hsl(231deg 32% 48%) 30%,
-              hsl(231deg 30% 53%) 40%,
-              hsl(231deg 30% 59%) 50%,
-              hsl(231deg 30% 65%) 60%,
-              hsl(231deg 28% 71%) 70%,
-              hsl(231deg 25% 77%) 80%,
-              hsl(231deg 19% 84%) 90%,
-              hsl(0deg 0% 91%) 100%
-      );
-      min-height: 55vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.8fr) minmax(0, 0.6fr);
-      align-items: center;
-      gap: 2rem;
-      padding: 3.5rem 0;
-    }
-
-    .hero h1 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      max-width: 800px;
-    }
-
-    .hero-content {
-      color: white;
-      max-width: 620px;
-      position: relative;
-      z-index: 2;
-    }
-    .hero p {
-      max-width: 650px;
-      font-size: 1.1rem;
-      opacity: 0.95;
-      margin-bottom: 2.2rem;
-    }
-
-    .hero-logo {
-      width: 290px;
-      height: auto;
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-figure-wrap {
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-start;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-figure {
-      width: clamp(520px, 60vw, 1100px);
-      max-width: none;
-      height: auto;
-      filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.35));
-      transform: translateX(-35%);
-    }
-
-    .cta-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .btn {
-      padding: 0.85rem 1.4rem;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      display: inline-block;
-    }
-
-    .btn-primary {
-      background: var(--red);
-      color: #fff;
-    }
-
-    .btn-grad {background-image: linear-gradient(to right, #e52d27 0%, #b31217  51%, #e52d27  100%)}
-    .btn-grad {
-      padding: 15px 45px;
-      text-align: center;
-      text-transform: uppercase;
-      transition: 0.5s;
-      background-size: 200% auto;
-      color: white;
-      box-shadow: 0 0 12px #eee;
-      border-radius: 10px;
-      display: block;
-    }
-
-    .btn-grad:hover {
-      background-position: right center; /* change the direction of the change here */
-      color: #fff;
-      text-decoration: none;
-    }
-
-
-    .btn-secondary {
-      background: #fff;
-      color: #111;
-    }
-
-    /* SECTIONS */
-    section {
-      padding: 3.5rem 1rem;
-    }
-
-    h2 {
-      font-size: 1.7rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .intro {
-      max-width: 720px;
-      font-size: 1.05rem;
-      color: #333;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.6rem;
-    }
-
-    .card {
-      background: #fff;
-      border: 1px solid #e4e4e4;
-      border-radius: 10px;
-      overflow: hidden;
-      padding: 1.4rem;
-      transition: transform .2s ease;
-    }
-
-    .card-media {
-      width: calc(100% + 2.8rem);
-      height: 160px;
-      margin: -1.4rem -1.4rem 1rem;
-      object-fit: cover;
-      max-width: none;
-      display: block;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-    }
-
-    .tag {
-      display: inline-block;
-      background: #eee;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-
-    .highlight {
-      background: var(--gray);
-    }
-
-    .sfg-words {
-      background: #fff;
-    }
-
-    .sfg-words-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
-      gap: 1.6rem;
-      align-items: start;
-    }
-
-    .sfg-words-content {
-      max-width: 520px;
-    }
-
-    .sfg-slider {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #111;
-      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
-    }
-
-    .sfg-slides {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      position: relative;
-      min-height: 380px;
-    }
-
-    .sfg-slides li {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 0.35s ease;
-    }
-
-    .sfg-slides li.is-active {
-      opacity: 1;
-      z-index: 1;
-    }
-
-    .sfg-slides img {
-      width: 100%;
-      height: 380px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .sfg-slider-controls {
-      position: absolute;
-      left: 50%;
-      bottom: 12px;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 4px 10px;
-      min-height: 24px;
-      border-radius: 999px;
-      background: url("./assets/img/slider_nav_bg.png") center/100% 100% no-repeat;
-      z-index: 2;
-    }
-
-    .sfg-slider-controls button {
-      border: 0;
-      background-color: transparent;
-      background-image: none;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-      text-indent: -9999px;
-      overflow: hidden;
-      display: block;
-      padding: 0;
-      box-shadow: none;
-    }
-
-    .sfg-prev {
-      background: url("./assets/img/prev.png") center/contain no-repeat !important;
-    }
-
-    .sfg-next {
-      background: url("./assets/img/next.png") center/contain no-repeat !important;
-    }
-
-    .sfg-slider-cta {
-      display: flex;
-      justify-content: center;
-      margin-top: 1.2rem;
-    }
-
-    .sfg-slider-cta .btn {
-      display: inline-block;
-    }
-
-    @media (min-width: 901px) {
-      .sfg-slider-cta {
-        margin-top: 1.8rem;
-      }
-    }
-
-    .sfg-slider-dots {
-      display: none;
-    }
-
-    .sfg-words-title {
-      margin-bottom: 0.7rem;
-      font-size: 1.45rem;
-    }
-
-    .sfg-words-stats {
-      list-style: disc;
-      display: grid;
-      gap: 0.4rem;
-      margin-bottom: 0.8rem;
-      padding-left: 1.1rem;
-      font-weight: 700;
-      color: var(--red-soft);
-      font-style: italic;
-    }
-
-    .sfg-words-details {
-      list-style: disc;
-      display: grid;
-      gap: 0.35rem;
-      padding-left: 1.1rem;
-      color: #222;
-      font-size: 0.98rem;
-    }
-
-    @media (max-width: 900px) {
-      .sfg-words-layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .video-section {
-      background: #fff;
-    }
-
-    .video-wrap {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
-    }
-
-    .video-wrap iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-    
-    /* WIDGET CALENDAR */
-	.next-course {
-  	background: #111;
-  	color: #fff;
-  	padding: 0.8rem 0;
-	}
-
-	.next-course-inner {
- 	 display: flex;
- 	 align-items: center;
-  	 gap: 1rem;
-  	 font-size: 0.95rem;
-	}
-
-.next-course .arrow {
-  color: var(--red);
-  font-size: 1.4rem;
-  animation: bounceX 1.6s infinite;
-}
-
-.next-course-info {
-  flex: 1;
-}
-
-.next-course-action {
-  white-space: nowrap;
-}
-
-.spond-btn {
-  display: inline-block;
-  padding: 0.5rem 0.9rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  background: #fff;
-  color: var(--red);
-  border: 2px solid var(--red);
-  transition: all 0.2s ease;
-}
-
-.spond-btn .label-short {
-  display: none;
-}
-
-@keyframes bounceX {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(6px); }
-}
-
-
-    /* RESULTS */
-    .results .card {
-      border-left: 4px solid var(--red);
-    }
-
-    .fb-feed {
-      width: 100%;
-      height: 680px;
-      border: 0;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
-    }
-
-    @media (max-width: 700px) {
-      .fb-feed {
-        height: 520px;
-      }
-    }
-
-    /* CTA FINAL */
-    .cta-section {
-      background: var(--black);
-      color: #fff;
-      text-align: center;
-    }
-
-    .cta-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-      gap: 2rem;
-      align-items: start;
-      margin-top: 2rem;
-      text-align: left;
-    }
-
-    form {
-      max-width: 420px;
-      margin: 0;
-      display: grid;
-      gap: 1rem;
-    }
-
-    input, select, button {
-      padding: 0.9rem;
-      border-radius: 6px;
-      border: none;
-      font-size: 1rem;
-    }
-
-    input, select {
-      background: #f1f1f1;
-    }
-
-    button {
-      background: var(--red);
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .cta-logo {
-      width: min(220px, 70%);
-      margin: 1.2rem auto 0;
-      display: block;
-    }
-
-    .cta-form-block {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .cta-form-block form {
-      width: 100%;
-      max-width: 420px;
-    }
-
-    .cta-iframe-wrap {
-      width: 100%;
-      max-width: 540px;
-    }
-
-    .cta-iframe {
-      width: 100%;
-      height: 705px;
-      border: 0;
-      display: block;
-    }
-
-    @media (max-width: 600px) {
-      .cta-iframe {
-        height: 760px;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .cta-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cta-section {
-        text-align: center;
-      }
-
-      form {
-        margin: 0 auto;
-      }
-    }
-
-    /* FOOTER */
-    .footer {
-      font-size: 0.95rem;
-      color: #d3d3d3;
-    }
-
-    .footer-top {
-      background: radial-gradient(circle at top left, rgba(225, 6, 0, 0.2), transparent 55%), #0c0c0c;
-      color: #c7c7c7;
-      padding: 3.5rem 0 3rem;
-    }
-
-    .footer-top .container {
-      display: grid;
-      gap: 2rem;
-      align-items: start;
-    }
-
-    .footer-brand {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .footer-logo {
-      width: min(240px, 80%);
-    }
-
-    .footer-brand-text {
-      color: #b8b8b8;
-    }
-
-    .footer-hours {
-      display: grid;
-      gap: 0.8rem;
-      margin-top: 0.6rem;
-    }
-
-    .footer-hours-title {
-      color: #fff;
-      font-weight: 700;
-    }
-
-    .footer-list-title {
-      color: #fff;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      position: relative;
-      padding-bottom: 0.5rem;
-    }
-
-    .footer-list-title::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 60px;
-      height: 2px;
-      background: var(--red);
-    }
-
-    .footer-list {
-      display: grid;
-      gap: 0.8rem;
-    }
-
-    .footer-list-item {
-      display: grid;
-      gap: 0.3rem;
-    }
-
-    .footer-link {
-      color: #d6d6d6;
-    }
-
-    .footer-link:hover {
-      color: #fff;
-    }
-
-    .footer-map iframe {
-      width: 100%;
-      height: 220px;
-      border: 0;
-      border-radius: 10px;
-    }
-
-    .social-list {
-      display: flex;
-      gap: 0.8rem;
-      margin-top: 0.4rem;
-    }
-
-    .social-link {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 0.9rem;
-    }
-
-    .footer-bottom {
-      background: #070707;
-      color: #9e9e9e;
-      padding: 1rem 0;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    .footer-bottom a {
-      color: #cfcfcf;
-    }
-
-    @media (min-width: 900px) {
-      .footer-top .container {
-        grid-template-columns: 1.1fr 1fr 0.8fr;
-      }
-
-      .footer-map iframe {
-        height: 260px;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        min-height: auto;
-      }
-
-      .hero-layout {
-        grid-template-columns: 1fr;
-        text-align: left;
-        padding: 3rem 0 2.5rem;
-      }
-
-      .hero-content {
-        position: relative;
-        padding: 1.5rem;
-        border-radius: 16px;
-        overflow: hidden;
-        background: rgba(11, 11, 11, 0.35);
-      }
-
-      .hero-content::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: url("./assets/img/boxeuse_sfg_transparency_comp.png") center 20% / cover no-repeat;
-        filter: blur(6px);
-        opacity: 0.45;
-        transform: scale(1.05);
-        z-index: 0;
-      }
-
-      .hero-content > * {
-        position: relative;
-        z-index: 1;
-      }
-
-      .hero-figure-wrap {
-        display: none;
-      }
-
-      .hero-figure {
-        width: min(100%, 640px);
-        transform: none;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .hero-logo {
-        width: 120px;
-      }
-
-      .hero p {
-        font-size: 1rem;
-      }
-
-      .hero-figure {
-        width: min(100%, 520px);
-        transform: none;
-      }
-
-      .spond-btn .label-full {
-        display: none;
-      }
-
-      .spond-btn .label-short {
-        display: inline;
-      }
-    }
-
-    @media (max-width: 800px) {
-      .nav {
-        justify-content: space-between;
-      }
-
-      .menu-toggle {
-        display: inline-flex;
-      }
-
-      .nav-links {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        left: 0;
-        flex-direction: column;
-        gap: 0;
-        background: #0b0b0b;
-        border-bottom: 1px solid #1e1e1e;
-        transform: translateY(-10px);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease, transform 0.2s ease;
-      }
-
-      .nav-links a {
-        padding: 0.9rem 1rem;
-        border-top: 1px solid #1e1e1e;
-      }
-
-      .nav-links.is-open {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <title>SFG Savate Lyon – Club de Savate Boxe Française et disciplines associées pour tous, du loisir à la compétition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Club de Savate Boxe Française, Savate Forme, Préparation Physique, Canne de Combat à Lyon. Loisirs, jeunes, compétition. Tous niveaux, tous âges, cours tous les jours." />
+
+    <style>
+        :root {
+            --red: #e10600;
+            --red-soft: #ff5a4f;
+            --black: #0b0b0b;
+            --gray: #f3f3f3;
+            --max-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Dosis', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: #fff;
+            color: #111;
+            line-height: 1.55;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 1rem;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            background: #0b0b0b; /* noir SFG */
+            border-bottom: 1px solid #1e1e1e;
+            z-index: 20;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+            .nav-links a {
+                color: #fff;
+                opacity: 0.9;
+            }
+
+                .nav-links a:hover {
+                    color: var(--red);
+                    opacity: 1;
+                }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            border: 1px solid #1e1e1e;
+            background: transparent;
+            cursor: pointer;
+        }
+
+            .menu-toggle span {
+                position: relative;
+                width: 20px;
+                height: 2px;
+                background: #fff;
+                display: block;
+                transition: transform 0.2s ease, opacity 0.2s ease;
+            }
+
+                .menu-toggle span::before,
+                .menu-toggle span::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    width: 20px;
+                    height: 2px;
+                    background: #fff;
+                    transition: transform 0.2s ease;
+                }
+
+                .menu-toggle span::before {
+                    top: -6px;
+                }
+
+                .menu-toggle span::after {
+                    top: 6px;
+                }
+
+            .menu-toggle.is-active span {
+                background: transparent;
+            }
+
+                .menu-toggle.is-active span::before {
+                    transform: translateY(6px) rotate(45deg);
+                }
+
+                .menu-toggle.is-active span::after {
+                    transform: translateY(-6px) rotate(-45deg);
+                }
+        /* HERO */
+        .hero {
+            background-image: linear-gradient( 115deg, hsl(231deg 53% 34%) 0%, hsl(231deg 45% 38%) 10%, hsl(231deg 38% 43%) 20%, hsl(231deg 32% 48%) 30%, hsl(231deg 30% 53%) 40%, hsl(231deg 30% 59%) 50%, hsl(231deg 30% 65%) 60%, hsl(231deg 28% 71%) 70%, hsl(231deg 25% 77%) 80%, hsl(231deg 19% 84%) 90%, hsl(0deg 0% 91%) 100% );
+            min-height: 55vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.8fr) minmax(0, 0.6fr);
+            align-items: center;
+            gap: 2rem;
+            padding: 3.5rem 0;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            max-width: 800px;
+        }
+
+        .hero-content {
+            color: white;
+            max-width: 620px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p {
+            max-width: 650px;
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 2.2rem;
+        }
+
+        .hero-logo {
+            width: 290px;
+            height: auto;
+            margin-bottom: 1.4rem;
+        }
+
+        .hero-figure-wrap {
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-figure {
+            width: clamp(520px, 60vw, 1100px);
+            max-width: none;
+            height: auto;
+            filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.35));
+            transform: translateX(-35%);
+        }
+
+        .cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.85rem 1.4rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--red);
+            color: #fff;
+        }
+
+        .btn-grad {
+            background-image: linear-gradient(to right, #e52d27 0%, #b31217 51%, #e52d27 100%)
+        }
+
+        .btn-grad {
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 12px #eee;
+            border-radius: 10px;
+            display: block;
+        }
+
+            .btn-grad:hover {
+                background-position: right center; /* change the direction of the change here */
+                color: #fff;
+                text-decoration: none;
+            }
+
+
+        .btn-secondary {
+            background: #fff;
+            color: #111;
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 3.5rem 1rem;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .intro {
+            max-width: 720px;
+            font-size: 1.05rem;
+            color: #333;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.6rem;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e4e4e4;
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 1.4rem;
+            transition: transform .2s ease;
+        }
+
+        .card-media {
+            width: calc(100% + 2.8rem);
+            height: 160px;
+            margin: -1.4rem -1.4rem 1rem;
+            object-fit: cover;
+            max-width: none;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eee;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .highlight {
+            background: var(--gray);
+        }
+
+        .sfg-words {
+            background: #fff;
+        }
+
+        .sfg-words-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+            gap: 1.6rem;
+            align-items: start;
+        }
+
+        .sfg-words-content {
+            max-width: 520px;
+        }
+
+        .sfg-slider {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #111;
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        .sfg-slides {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            min-height: 380px;
+        }
+
+            .sfg-slides li {
+                position: absolute;
+                inset: 0;
+                opacity: 0;
+                transition: opacity 0.35s ease;
+            }
+
+                .sfg-slides li.is-active {
+                    opacity: 1;
+                    z-index: 1;
+                }
+
+            .sfg-slides img {
+                width: 100%;
+                height: 380px;
+                object-fit: cover;
+                display: block;
+            }
+
+        .sfg-slider-controls {
+            position: absolute;
+            left: 50%;
+            bottom: 12px;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 4px 10px;
+            min-height: 24px;
+            border-radius: 999px;
+            background: url("./assets/img/slider_nav_bg.png") center/100% 100% no-repeat;
+            z-index: 2;
+        }
+
+            .sfg-slider-controls button {
+                border: 0;
+                background-color: transparent;
+                background-image: none;
+                width: 30px;
+                height: 30px;
+                cursor: pointer;
+                text-indent: -9999px;
+                overflow: hidden;
+                display: block;
+                padding: 0;
+                box-shadow: none;
+            }
+
+        .sfg-prev {
+            background: url("./assets/img/prev.png") center/contain no-repeat !important;
+        }
+
+        .sfg-next {
+            background: url("./assets/img/next.png") center/contain no-repeat !important;
+        }
+
+        .sfg-slider-cta {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.2rem;
+        }
+
+            .sfg-slider-cta .btn {
+                display: inline-block;
+            }
+
+        @media (min-width: 901px) {
+            .sfg-slider-cta {
+                margin-top: 1.8rem;
+            }
+        }
+
+        .sfg-slider-dots {
+            display: none;
+        }
+
+        .sfg-words-title {
+            margin-bottom: 0.7rem;
+            font-size: 1.45rem;
+        }
+
+        .sfg-words-stats {
+            list-style: disc;
+            display: grid;
+            gap: 0.4rem;
+            margin-bottom: 0.8rem;
+            padding-left: 1.1rem;
+            font-weight: 700;
+            color: var(--red-soft);
+            font-style: italic;
+        }
+
+        .sfg-words-details {
+            list-style: disc;
+            display: grid;
+            gap: 0.35rem;
+            padding-left: 1.1rem;
+            color: #222;
+            font-size: 0.98rem;
+        }
+
+        @media (max-width: 900px) {
+            .sfg-words-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .video-section {
+            background: #fff;
+        }
+
+        .video-wrap {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
+        }
+
+            .video-wrap iframe {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                border: 0;
+            }
+
+        /* WIDGET CALENDAR */
+        .next-course {
+            background: #111;
+            color: #fff;
+            padding: 0.8rem 0;
+        }
+
+        .next-course-inner {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .next-course .arrow {
+            color: var(--red);
+            font-size: 1.4rem;
+            animation: bounceX 1.6s infinite;
+        }
+
+        .next-course-info {
+            flex: 1;
+        }
+
+        .next-course-action {
+            white-space: nowrap;
+        }
+
+        .spond-btn {
+            display: inline-block;
+            padding: 0.5rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            background: #fff;
+            color: var(--red);
+            border: 2px solid var(--red);
+            transition: all 0.2s ease;
+        }
+
+            .spond-btn .label-short {
+                display: none;
+            }
+
+        @keyframes bounceX {
+            0%, 100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(6px);
+            }
+        }
+
+
+        /* RESULTS */
+        .results .card {
+            border-left: 4px solid var(--red);
+        }
+
+        .fb-feed {
+            width: 100%;
+            height: 680px;
+            border: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        @media (max-width: 700px) {
+            .fb-feed {
+                height: 520px;
+            }
+        }
+
+        /* CTA FINAL */
+        .cta-section {
+            background: var(--black);
+            color: #fff;
+            text-align: center;
+        }
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+            gap: 2rem;
+            align-items: start;
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        form {
+            max-width: 420px;
+            margin: 0;
+            display: grid;
+            gap: 1rem;
+        }
+
+        input, select, button {
+            padding: 0.9rem;
+            border-radius: 6px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        input, select {
+            background: #f1f1f1;
+        }
+
+        button {
+            background: var(--red);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .cta-logo {
+            width: min(220px, 70%);
+            margin: 1.2rem auto 0;
+            display: block;
+        }
+
+        .cta-form-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .cta-form-block form {
+                width: 100%;
+                max-width: 420px;
+            }
+
+        .cta-iframe-wrap {
+            width: 100%;
+            max-width: 540px;
+        }
+
+        .cta-iframe {
+            width: 100%;
+            height: 705px;
+            border: 0;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .cta-iframe {
+                height: 760px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .cta-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                text-align: center;
+            }
+
+            form {
+                margin: 0 auto;
+            }
+        }
+
+        /* FOOTER */
+        .footer {
+            font-size: 0.95rem;
+            color: #d3d3d3;
+        }
+
+        .footer-top {
+            background: radial-gradient(circle at top left, rgba(225, 6, 0, 0.2), transparent 55%), #0c0c0c;
+            color: #c7c7c7;
+            padding: 3.5rem 0 3rem;
+        }
+
+            .footer-top .container {
+                display: grid;
+                gap: 2rem;
+                align-items: start;
+            }
+
+        .footer-brand {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            width: min(240px, 80%);
+        }
+
+        .footer-brand-text {
+            color: #b8b8b8;
+        }
+
+        .footer-hours {
+            display: grid;
+            gap: 0.8rem;
+            margin-top: 0.6rem;
+        }
+
+        .footer-hours-title {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .footer-list-title {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+            .footer-list-title::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 60px;
+                height: 2px;
+                background: var(--red);
+            }
+
+        .footer-list {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .footer-list-item {
+            display: grid;
+            gap: 0.3rem;
+        }
+
+        .footer-link {
+            color: #d6d6d6;
+        }
+
+            .footer-link:hover {
+                color: #fff;
+            }
+
+        .footer-map iframe {
+            width: 100%;
+            height: 220px;
+            border: 0;
+            border-radius: 10px;
+        }
+
+        .social-list {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.4rem;
+        }
+
+        .social-link {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom {
+            background: #070707;
+            color: #9e9e9e;
+            padding: 1rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+            .footer-bottom a {
+                color: #cfcfcf;
+            }
+
+        @media (min-width: 900px) {
+            .footer-top .container {
+                grid-template-columns: 1.1fr 1fr 0.8fr;
+            }
+
+            .footer-map iframe {
+                height: 260px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                min-height: auto;
+            }
+
+            .hero-layout {
+                grid-template-columns: 1fr;
+                text-align: left;
+                padding: 3rem 0 2.5rem;
+            }
+
+            .hero-content {
+                position: relative;
+                padding: 1.5rem;
+                border-radius: 16px;
+                overflow: hidden;
+                background: rgba(11, 11, 11, 0.35);
+            }
+
+                .hero-content::before {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    background: url("./assets/img/boxeuse_sfg_transparency_comp.png") center 20% / cover no-repeat;
+                    filter: blur(6px);
+                    opacity: 0.45;
+                    transform: scale(1.05);
+                    z-index: 0;
+                }
+
+                .hero-content > * {
+                    position: relative;
+                    z-index: 1;
+                }
+
+            .hero-figure-wrap {
+                display: none;
+            }
+
+            .hero-figure {
+                width: min(100%, 640px);
+                transform: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-logo {
+                width: 120px;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-figure {
+                width: min(100%, 520px);
+                transform: none;
+            }
+
+            .spond-btn .label-full {
+                display: none;
+            }
+
+            .spond-btn .label-short {
+                display: inline;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .nav {
+                justify-content: space-between;
+            }
+
+            .menu-toggle {
+                display: inline-flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                flex-direction: column;
+                gap: 0;
+                background: #0b0b0b;
+                border-bottom: 1px solid #1e1e1e;
+                transform: translateY(-10px);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s ease, transform 0.2s ease;
+            }
+
+                .nav-links a {
+                    padding: 0.9rem 1rem;
+                    border-top: 1px solid #1e1e1e;
+                }
+
+                .nav-links.is-open {
+                    transform: translateY(0);
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-  <div class="container nav">
-    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="primaryNav">
-      <span></span>
-    </button>
-    <nav class="nav-links" id="primaryNav">
-      <a href="#leclub">Le club</a>
-      <a href="./galerie.html">Galerie</a>
-      <a href="#pratiques">Disciplines</a>
-      <a href="./planning.html">Horaires</a>
-      <a href="#cta-form">Inscription</a>
-      <a href="#actualites">Actualités</a>
-      <a href="#cta-form">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="container hero-layout">
-    <div class="hero-content">
-      <img class="hero-logo" src="./assets/img/sfg_logo_blanc.png" alt="Logo SFG Savate">
-      <h1>Club de Savate Boxe Française & Disciplines Associées à Lyon</h1>
-      <p>
-        Loisir, compétition, pour tous les âges, pour toutes et tous. <br/>
-        Un club historique, inclusif et engagé dans la performance, dans une ambiance conviviale !
-      </p>
-      <div class="cta-group">
-        <a class="btn btn-primary btn-grad" href="#cta-form">Cours d’essai gratuit</a>
-      </div>
-    </div>
-    <div class="hero-figure-wrap">
-      <img class="hero-figure" src="./assets/img/boxeuse_sfg_transparency_comp.png" alt="Boxeuse SFG">
-    </div>
-  </div>
-</section>
-
-<section class="next-course">
-  <div class="container next-course-inner">
-    <div class="arrow">➜</div>
-
-    <div class="next-course-info">
-      <div id="nextCourse">Chargement des prochains cours…</div>
-    </div>
-
-    <div class="next-course-action">
-      <a
-              href="https://spond.com/client/groups/EF32BF04991C4377A2DBEC0D9B5D5268"
-              target="_blank"
-              rel="noopener"
-              class="spond-btn"
-      >
-        <span class="label-full">S’inscrire au cours sur Spond</span>
-        <span class="label-short">S’inscrire</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="container" id="pratiques">
-  <h2>Un club, plusieurs pratiques</h2>
-  <p class="intro">Le SFG propose une pratique accessible à toutes et à tous, avec des parcours adaptés selon l’âge, les objectifs et le niveau.</p>
-
-  <div class="grid" style="margin-top:2rem;">
-    <div class="card">
-      <img class="card-media" src="./assets/img/loisirs.jpg" alt="Séance loisir de savate boxe française">
-      <span class="tag">Loisir</span>
-      <h3>Savate Boxe Française</h3>
-      <p>Coordination, cardio, self-contrôle. Un sport de combat complet qui fait progresser vite, même sans expérience.</p>
-    </div>
-
-    <div class="card">
-      <img class="card-media" src="./assets/img/jeunes.jpg" alt="Entraînement jeunes savate boxe française">
-      <span class="tag">Jeunes</span>
-      <h3>Enfants & adolescents</h3>
-      <p>Développement moteur, confiance en soi, respect et cadre structurant.</p>
-    </div>
-
-    <div class="card">
-      <img class="card-media" src="./assets/img/competition.jpg" alt="Compétition de savate boxe française">
-      <span class="tag">Performance</span>
-      <h3>Compétition</h3>
-      <p>Profitez de nos séances de préparation physique et d'un encadrement compétition pour atteindre vos objectifs.</p>
-    </div>
-
-    <div class="card">
-      <img class="card-media" src="./assets/img/da.jpg" alt="Discipline associée canne de combat">
-      <span class="tag">DA</span>
-      <h3>Disciplines associées</h3>
-      <p>Pratiquez les disciplines associées à la BF telles que la Savate Forme, la Canne de Combat et le Bâton.</p>
-    </div>
-
-  </div>
-</section>
-
-
-
-<section id="leclub" class="video-section">
-  <div class="container">
-    <h2>Présentation du club</h2>
-    <p class="intro">Un aperçu du SFG, de l’ambiance et de nos entraînements.</p>
-    <div class="video-wrap" style="margin-top: 1.6rem;">
-      <iframe
-        src="https://www.youtube.com/embed/hCm3lVSozt4"
-        title="Presentation du club SFG Savate Lyon"
-        loading="lazy"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
-    </div>
-  </div>
-</section>
-
-<section class="sfg-words">
-  <div class="container sfg-words-layout">
-    <div class="sfg-words-content">
-      <h2 class="sfg-words-title">Le SFG en quelques mots</h2>
-      <ul class="sfg-words-stats">
-        <li>7 titres de champion du Monde</li>
-        <li>6 titres de champion d'Europe</li>
-        <li>43 titres de champion de France</li>
-        <li>9 titres de vainqueur de l’Open de France</li>
-        <li>2 médailles d'argent aux World Combat Games 2013</li>
-      </ul>
-      <ul class="sfg-words-details">
-        <li>Activités : Savate Boxe Française, Savate forme, Canne de Combat et Bâton.</li>
-        <li>Un club adapté à vos exigences (débutants, loisirs, confirmés, compétiteurs, enfants et adultes), ouvert à toutes et à tous.</li>
-        <li>Plus de 200 licenciés.</li>
-        <li>2 salles d'entraînements et 2 fois plus de cours.</li>
-        <li>Un encadrement de qualité BEE3, BEE2, BEE1 et CQP animateur de Savate Boxe Française.</li>
-        <li>Participation à de nombreux stages et formations.</li>
-        <li>Préparation à la compétition.</li>
-        <li>Séances de préparation physique sous forme de circuit cross training.</li>
-      </ul>
-    </div>
-    <div class="sfg-slider-wrap">
-      <div class="sfg-slider" aria-label="Galerie SFG">
-        <ul class="sfg-slides">
-          <li class="is-active">
-            <img src="./assets/img/78809598_1473090879507314_1237423951068528640_o.jpg" alt="Sara Tebbakh finale monde 2019">
-          </li>
-          <li>
-            <img src="./assets/img/78998739_1475685192581216_7145238461279109120_o.jpg" alt="Amîn El Baz gala la Motte Servolex 2019">
-          </li>
-          <li>
-            <img src="./assets/img/79144015_1473091262840609_1980790834756321280_o.jpg" alt="Sara Tebbakh finale monde 2019">
-          </li>
-          <li>
-            <img src="./assets/img/78785460_1475685395914529_3160125825592852480_o.jpg" alt="Amîn El Baz gala la Motte Servolex 2019">
-          </li>
-          <li>
-            <img src="./assets/img/SAAD_FINALE_JUNIOR2019-e1567617562808.jpg" alt="Saad Bellemoud finale junior 2019">
-          </li>
-        </ul>
-        <div class="sfg-slider-controls" aria-hidden="true">
-          <button class="sfg-prev" type="button" aria-label="Photo précédente">‹</button>
-          <button class="sfg-next" type="button" aria-label="Photo suivante">›</button>
+    <header>
+        <div class="container nav">
+            <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="primaryNav">
+                <span></span>
+            </button>
+            <nav class="nav-links" id="primaryNav">
+                <a href="#leclub">Le club</a>
+                <a href="./galerie.html">Galerie</a>
+                <a href="#pratiques">Disciplines</a>
+                <a href="./planning.html">Horaires</a>
+                <a href="./Fiche_Inscription_SFG_2026_2027_.pdf">Adhésion 26/27</a>
+                <a href="#actualites">Actualités</a>
+                <a href="#cta-form">Contact</a>
+            </nav>
         </div>
-      </div>
-      <div class="sfg-slider-cta">
-        <a class="btn btn-primary btn-grad" href="#actualites">Cours d'essai gratuit</a>
-      </div>
-    </div>
-  </div>
-</section>
+    </header>
 
-<section class="cta-section" id="actualites">
-  <div class="container">
-    <div class="cta-grid">
-      <div>
-        <h2 style="margin-bottom: 1rem;">Actualités</h2>
-        <iframe
-          class="fb-feed"
-          title="Actualités SFG Savate sur Facebook"
-          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057343214536&tabs=timeline&width=1200&height=680&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&locale=fr_FR"
-          data-src-desktop="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057343214536&tabs=timeline&width=1200&height=680&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&locale=fr_FR"
-          data-src-mobile="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057343214536&tabs=timeline&height=680&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&locale=fr_FR"
-          scrolling="no"
-          frameborder="0"
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          loading="lazy"
-          allowfullscreen="true"
-        ></iframe>
-      </div>
-
-      <div id="cta-form" class="cta-form-block">
-        <h2 style="margin-bottom: 0.6rem;">Envie de découvrir le SFG ?</h2>
-        <div class="cta-iframe-wrap">
-          <iframe
-            class="cta-iframe"
-            title="Formulaire de contact SFG Savate"
-            src="https://902256e1.sibforms.com/serve/MUIFABFMMLj0a8EiEwyBomgcFD0vCtNRv9eRRyWj776tRjLXmiQ16am31UzZHtdb_WkkibSjBg-yEDhyfR5NK_a9yAVK12h40UyV57NL2dp3aJQX6UDKbiUgy4zg4ueE-qPvohfNdmav0oI0s9E7ovfwpK6aiwihlOzW2ooE0J7IOu3X2TCi37Qj9bZz5CzEF0StfBnxLqGFlWj7"
-            scrolling="auto"
-            allowfullscreen
-            loading="lazy"
-          ></iframe>
+    <section class="hero">
+        <div class="container hero-layout">
+            <div class="hero-content">
+                <img class="hero-logo" src="./assets/img/sfg_logo_blanc.png" alt="Logo SFG Savate">
+                <h1>Club de Savate Boxe Française & Disciplines Associées à Lyon</h1>
+                <p>
+                    Loisir, compétition, pour tous les âges, pour toutes et tous. <br />
+                    Un club historique, inclusif et engagé dans la performance, dans une ambiance conviviale !
+                </p>
+                <div class="cta-group">
+                    <a class="btn btn-primary btn-grad" href="#cta-form">Cours d’essai gratuit</a>
+                </div>
+            </div>
+            <div class="hero-figure-wrap">
+                <img class="hero-figure" src="./assets/img/boxeuse_sfg_transparency_comp.png" alt="Boxeuse SFG">
+            </div>
         </div>
-      </div>
-  </div>
-</section>
+    </section>
 
-<footer class="footer" id="contact">
-  <div class="footer-top">
-    <div class="container">
-      <div class="footer-brand">
-        <img class="footer-logo" src="./assets/img/sfg_logo_blanc.png" alt="Logo SFG Savate">
-        <p class="footer-brand-text">
-          Club Lyonnais de Savate Boxe Française, Savate Forme, Canne de Combat et Préparation Physique.
-        </p>
-      </div>
+    <section class="next-course">
+        <div class="container next-course-inner">
+            <div class="arrow">➜</div>
 
-      <div class="footer-list">
-        <div class="footer-list-title">Nous contacter</div>
-        <div class="footer-list-item">
-          <a class="footer-link" href="https://maps.app.goo.gl/hFuSgLeDwSfsWmwE6">40 rue de Gerland, 69007 Lyon</a>
+            <div class="next-course-info">
+                <div id="nextCourse">Chargement des prochains cours…</div>
+            </div>
+
+            <div class="next-course-action">
+                <a href="https://spond.com/client/groups/EF32BF04991C4377A2DBEC0D9B5D5268"
+                   target="_blank"
+                   rel="noopener"
+                   class="spond-btn">
+                    <span class="label-full">S’inscrire au cours sur Spond</span>
+                    <span class="label-short">S’inscrire</span>
+                </a>
+            </div>
         </div>
-        <div class="footer-list-item footer-map">
-          <iframe
-            src="https://www.openstreetmap.org/export/embed.html?bbox=4.834%2C45.737%2C4.848%2C45.744&layer=mapnik&marker=45.740589%2C4.84055"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Plan SFG Savate"
-          ></iframe>
+    </section>
+
+    <section class="container" id="pratiques">
+        <h2>Un club, plusieurs pratiques</h2>
+        <p class="intro">Le SFG propose une pratique accessible à toutes et à tous, avec des parcours adaptés selon l’âge, les objectifs et le niveau.</p>
+
+        <div class="grid" style="margin-top:2rem;">
+            <div class="card">
+                <img class="card-media" src="./assets/img/loisirs.jpg" alt="Séance loisir de savate boxe française">
+                <span class="tag">Loisir</span>
+                <h3>Savate Boxe Française</h3>
+                <p>Coordination, cardio, self-contrôle. Un sport de combat complet qui fait progresser vite, même sans expérience.</p>
+            </div>
+
+            <div class="card">
+                <img class="card-media" src="./assets/img/jeunes.jpg" alt="Entraînement jeunes savate boxe française">
+                <span class="tag">Jeunes</span>
+                <h3>Enfants & adolescents</h3>
+                <p>Développement moteur, confiance en soi, respect et cadre structurant.</p>
+            </div>
+
+            <div class="card">
+                <img class="card-media" src="./assets/img/competition.jpg" alt="Compétition de savate boxe française">
+                <span class="tag">Performance</span>
+                <h3>Compétition</h3>
+                <p>Profitez de nos séances de préparation physique et d'un encadrement compétition pour atteindre vos objectifs.</p>
+            </div>
+
+            <div class="card">
+                <img class="card-media" src="./assets/img/da.jpg" alt="Discipline associée canne de combat">
+                <span class="tag">DA</span>
+                <h3>Disciplines associées</h3>
+                <p>Pratiquez les disciplines associées à la BF telles que la Savate Forme, la Canne de Combat et le Bâton.</p>
+            </div>
+
         </div>
-        <div class="footer-list-item">
-          <a class="footer-link" href="tel:0662052080">06 62 05 20 80 - Franck </a>
+    </section>
+
+
+
+    <section id="leclub" class="video-section">
+        <div class="container">
+            <h2>Présentation du club</h2>
+            <p class="intro">Un aperçu du SFG, de l’ambiance et de nos entraînements.</p>
+            <div class="video-wrap" style="margin-top: 1.6rem;">
+                <iframe src="https://www.youtube.com/embed/hCm3lVSozt4"
+                        title="Presentation du club SFG Savate Lyon"
+                        loading="lazy"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="footer-list">
-        <div class="footer-list-title">Réseaux</div>
-        <div class="social-list">
-          <a class="social-link" href="https://www.facebook.com/p/SFG-Savate-100057343214536/" aria-label="Facebook">
-            <ion-icon name="logo-facebook"></ion-icon>
-          </a>
-          <a class="social-link" href="https://www.instagram.com/sfg_savate/?hl=fr" aria-label="Instagram">
-            <ion-icon name="logo-instagram"></ion-icon>
-          </a>
+    <section class="sfg-words">
+        <div class="container sfg-words-layout">
+            <div class="sfg-words-content">
+                <h2 class="sfg-words-title">Le SFG en quelques mots</h2>
+                <ul class="sfg-words-stats">
+                    <li>9 titres de champion du Monde</li>
+                    <li>6 titres de champion d'Europe</li>
+                    <li>52 titres de champion de France</li>
+                    <li>13 titres de vainqueur de l’Open de France</li>
+                    <li>2 médailles d'argent aux World Combat Games 2013</li>
+                </ul>
+                <ul class="sfg-words-details">
+                    <li>Activités : Savate Boxe Française, Savate forme, Canne de Combat et Bâton.</li>
+                    <li>Un club adapté à vos exigences (débutants, loisirs, confirmés, compétiteurs, enfants et adultes), ouvert à toutes et à tous.</li>
+                    <li>Plus de 200 licenciés.</li>
+                    <li>2 salles d'entraînements et 2 fois plus de cours.</li>
+                    <li>Un encadrement de qualité BEE3, BEE2, BEE1 et CQP animateur de Savate Boxe Française.</li>
+                    <li>Participation à de nombreux stages et formations.</li>
+                    <li>Préparation à la compétition.</li>
+                    <li>Séances de préparation physique sous forme de circuit cross training.</li>
+                </ul>
+            </div>
+            <div class="sfg-slider-wrap">
+                <div class="sfg-slider" aria-label="Galerie SFG">
+                    <ul class="sfg-slides">
+                        <li class="is-active">
+                            <img src="./assets/img/78809598_1473090879507314_1237423951068528640_o.jpg" alt="Sara Tebbakh finale monde 2019">
+                        </li>
+                        <li>
+                            <img src="./assets/img/78998739_1475685192581216_7145238461279109120_o.jpg" alt="Amîn El Baz gala la Motte Servolex 2019">
+                        </li>
+                        <li>
+                            <img src="./assets/img/79144015_1473091262840609_1980790834756321280_o.jpg" alt="Sara Tebbakh finale monde 2019">
+                        </li>
+                        <li>
+                            <img src="./assets/img/78785460_1475685395914529_3160125825592852480_o.jpg" alt="Amîn El Baz gala la Motte Servolex 2019">
+                        </li>
+                        <li>
+                            <img src="./assets/img/SAAD_FINALE_JUNIOR2019-e1567617562808.jpg" alt="Saad Bellemoud finale junior 2019">
+                        </li>
+                    </ul>
+                    <div class="sfg-slider-controls" aria-hidden="true">
+                        <button class="sfg-prev" type="button" aria-label="Photo précédente">‹</button>
+                        <button class="sfg-next" type="button" aria-label="Photo suivante">›</button>
+                    </div>
+                </div>
+                <div class="sfg-slider-cta">
+                    <a class="btn btn-primary btn-grad" href="#actualites">Cours d'essai gratuit</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="footer-bottom">
-    <div class="container">
-      <div>&copy; 2026 SFG Savate.</div>
-      <div><a href="./mentions-legales.html">Mentions légales</a></div>
-    </div>
-  </div>
-</footer>
+    <section class="cta-section" id="actualites">
+        <div class="container">
+            <div class="cta-grid">
+                <div>
+                    <h2 style="margin-bottom: 1rem;">Actualités</h2>
+                    <iframe class="fb-feed"
+                            title="Actualités SFG Savate sur Facebook"
+                            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057343214536&tabs=timeline&width=1200&height=680&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&locale=fr_FR"
+                            data-src-desktop="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057343214536&tabs=timeline&width=1200&height=680&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&locale=fr_FR"
+                            data-src-mobile="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057343214536&tabs=timeline&height=680&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&locale=fr_FR"
+                            scrolling="no"
+                            frameborder="0"
+                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                            loading="lazy"
+                            allowfullscreen="true"></iframe>
+                </div>
 
-<script>
- (function () {
-  const toggle = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav-links");
+                <div id="cta-form" class="cta-form-block">
+                    <h2 style="margin-bottom: 0.6rem;">Envie de découvrir le SFG ?</h2>
+                    <div class="cta-iframe-wrap">
+                        <iframe class="cta-iframe"
+                                title="Formulaire de contact SFG Savate"
+                                src="https://902256e1.sibforms.com/serve/MUIFABFMMLj0a8EiEwyBomgcFD0vCtNRv9eRRyWj776tRjLXmiQ16am31UzZHtdb_WkkibSjBg-yEDhyfR5NK_a9yAVK12h40UyV57NL2dp3aJQX6UDKbiUgy4zg4ueE-qPvohfNdmav0oI0s9E7ovfwpK6aiwihlOzW2ooE0J7IOu3X2TCi37Qj9bZz5CzEF0StfBnxLqGFlWj7"
+                                scrolling="auto"
+                                allowfullscreen
+                                loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+    </section>
 
-  if (!toggle || !nav) return;
+    <footer class="footer" id="contact">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-brand">
+                    <img class="footer-logo" src="./assets/img/sfg_logo_blanc.png" alt="Logo SFG Savate">
+                    <p class="footer-brand-text">
+                        Club Lyonnais de Savate Boxe Française, Savate Forme, Canne de Combat et Préparation Physique.
+                        Idéalement situé dans le 7ème arrondissement, proche de Jean Jaurès, Jean Macé, Gerland, Debourg, Saint-Fons, Lyon 8, Lyon 2 !
+                    </p>
+                </div>
 
-  const setState = (isOpen) => {
-    nav.classList.toggle("is-open", isOpen);
-    toggle.classList.toggle("is-active", isOpen);
-    toggle.setAttribute("aria-expanded", String(isOpen));
-  };
+                <div class="footer-list">
+                    <div class="footer-list-title">Nous contacter</div>
+                    <div class="footer-list-item">
+                        <a class="footer-link" href="https://maps.app.goo.gl/hFuSgLeDwSfsWmwE6">40 rue de Gerland, 69007 Lyon</a>
+                    </div>
+                    <div class="footer-list-item footer-map">
+                        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=4.834%2C45.737%2C4.848%2C45.744&layer=mapnik&marker=45.740589%2C4.84055"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Plan SFG Savate"></iframe>
+                    </div>
+                    <div class="footer-list-item">
+                        <a class="footer-link" href="tel:0662052080">06 62 05 20 80 - Franck </a>
+                    </div>
+                </div>
 
-  toggle.addEventListener("click", () => {
-    const isOpen = nav.classList.contains("is-open");
-    setState(!isOpen);
-  });
+                <div class="footer-list">
+                    <div class="footer-list-title">Réseaux</div>
+                    <div class="social-list">
+                        <a class="social-link" href="https://www.facebook.com/p/SFG-Savate-100057343214536/" aria-label="Facebook">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                        <a class="social-link" href="https://www.instagram.com/sfg_savate/?hl=fr" aria-label="Instagram">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
- nav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => setState(false));
-  });
- })();
+        <div class="footer-bottom">
+            <div class="container">
+                <div>&copy; 2026 SFG Savate.</div>
+                <div><a href="./mentions-legales.html">Mentions légales</a></div>
+            </div>
+        </div>
+    </footer>
 
- (function () {
-  const slider = document.querySelector(".sfg-slider");
-  if (!slider) return;
+    <script>
+        (function () {
+            const toggle = document.querySelector(".menu-toggle");
+            const nav = document.querySelector(".nav-links");
 
-  const slides = Array.from(slider.querySelectorAll(".sfg-slides li"));
-  const prev = slider.querySelector(".sfg-prev");
-  const next = slider.querySelector(".sfg-next");
+            if (!toggle || !nav) return;
 
-  if (!slides.length || !prev || !next) return;
+            const setState = (isOpen) => {
+                nav.classList.toggle("is-open", isOpen);
+                toggle.classList.toggle("is-active", isOpen);
+                toggle.setAttribute("aria-expanded", String(isOpen));
+            };
 
-  let index = 0;
+            toggle.addEventListener("click", () => {
+                const isOpen = nav.classList.contains("is-open");
+                setState(!isOpen);
+            });
 
-  const setActive = (nextIndex) => {
-    slides[index].classList.remove("is-active");
-    index = (nextIndex + slides.length) % slides.length;
-    slides[index].classList.add("is-active");
-  };
+            nav.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", () => setState(false));
+            });
+        })();
 
-  const nextSlide = () => setActive(index + 1);
-  const prevSlide = () => setActive(index - 1);
+        (function () {
+            const slider = document.querySelector(".sfg-slider");
+            if (!slider) return;
 
-  next.addEventListener("click", nextSlide);
-  prev.addEventListener("click", prevSlide);
+            const slides = Array.from(slider.querySelectorAll(".sfg-slides li"));
+            const prev = slider.querySelector(".sfg-prev");
+            const next = slider.querySelector(".sfg-next");
 
-  let timer = setInterval(nextSlide, 4500);
+            if (!slides.length || !prev || !next) return;
 
-  slider.addEventListener("mouseenter", () => clearInterval(timer));
-  slider.addEventListener("mouseleave", () => {
-    timer = setInterval(nextSlide, 4500);
-  });
- })();
+            let index = 0;
 
- (function () {
-  const now = new Date();
-  const today = now.getDay(); // 0 = dimanche
-  const minutesNow = now.getHours() * 60 + now.getMinutes();
-const planning = [
+            const setActive = (nextIndex) => {
+                slides[index].classList.remove("is-active");
+                index = (nextIndex + slides.length) % slides.length;
+                slides[index].classList.add("is-active");
+            };
 
-  // LUNDI
-  { day: 1, start: "19:30", end: "21:00", name: "Boxe Anglaise", place: "Gymnase Salvador Allendé, Saint-Fons", coach: "Matthieu" },
+            const nextSlide = () => setActive(index + 1);
+            const prevSlide = () => setActive(index - 1);
 
-  // MARDI
-  { day: 2, start: "18:00", end: "19:00", name: "Savate BF Ados (12/15ans)",  place: "Gymnase Benjamin Delessert Lyon 7", coach: "Matthieu" },
-  { day: 2, start: "18:00", end: "19:00", name: "Canne de combat", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Gérald Lamotte" },
-  { day: 2, start: "18:45", end: "20:30", name: "Savate BF Débutants/Intermédiaires", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Matthieu/Eddy Guéraud" },
-  { day: 2, start: "19:00", end: "20:15", name: "Savate Forme", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Gérald Lamotte" },
-  { day: 2, start: "20:15", end: "21:45", name: "Savate BF Confirmés", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
+            next.addEventListener("click", nextSlide);
+            prev.addEventListener("click", prevSlide);
 
-  // MERCREDI
-  { day: 3, start: "14:00", end: "15:00", name: "Savate BF Enfants (7/11ans)",  place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
-  { day: 3, start: "15:00", end: "16:00", name: "Savate BF Ados (12/15ans)",  place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
-  { day: 3, start: "19:00", end: "20:00", name: "Canne de combat Débutants",  place: "Gymnase Benjamin Delessert Lyon 7", coach: "Pierre-Alexandre  Kofron" },
-  { day: 3, start: "20:00", end: "21:30", name: "Prépa Physique & Technico-Tactique",  place: "Gymnase Benjamin Delessert Lyon 7", coach: "Matthieu" },
+            let timer = setInterval(nextSlide, 4500);
 
-  // JEUDI
-  { day: 4, start: "18:00", end: "19:00", name: "Préparation physique", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
-  { day: 4, start: "20:00", end: "21:30", name: "Savate BF", place: "Gymnase Salvador Allendé, Saint-Fons", coach: "Franck Meneroud" },
+            slider.addEventListener("mouseenter", () => clearInterval(timer));
+            slider.addEventListener("mouseleave", () => {
+                timer = setInterval(nextSlide, 4500);
+            });
+        })();
 
-  // VENDREDI
-  { day: 5, start: "19:00", end: "20:15", name: "Savate BF Débutants", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
-  { day: 5, start: "20:15", end: "21:45", name: "Savate BF Confirmés", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
+        (function () {
+            const now = new Date();
+            const today = now.getDay(); // 0 = dimanche
+            const minutesNow = now.getHours() * 60 + now.getMinutes();
+            // Vacances d'été 2026
+            const isSummer2026 = now.getFullYear() === 2026 && (now.getMonth() === 6 || now.getMonth() === 7); // juillet = 6, août = 7
+
+            // Affichage spécial pendant juillet et août 2026
+            if (isSummer2026) { document.getElementById("nextCourse").innerHTML = "<strong>Reprise des cours le 8 septembre 2026</strong>"; return; }
+
+            const planning = [
+
+                // LUNDI
+                { day: 1, start: "19:30", end: "21:00", name: "Boxe Anglaise", place: "Gymnase Salvador Allendé, Saint-Fons", coach: "Matthieu" },
+
+                // MARDI
+                { day: 2, start: "18:00", end: "19:00", name: "Savate BF Ados (12/15ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Matthieu" },
+                { day: 2, start: "18:00", end: "19:00", name: "Canne de combat", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Gérald Lamotte" },
+                { day: 2, start: "18:45", end: "20:30", name: "Savate BF Débutants/Intermédiaires", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Matthieu/Eddy Guéraud" },
+                { day: 2, start: "19:00", end: "20:15", name: "Savate Forme", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Gérald Lamotte" },
+                { day: 2, start: "20:15", end: "21:45", name: "Savate BF Confirmés", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
+
+                // MERCREDI
+                { day: 3, start: "14:00", end: "15:00", name: "Savate BF Enfants (7/11ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
+                { day: 3, start: "15:00", end: "16:00", name: "Savate BF Ados (12/15ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
+                { day: 3, start: "19:00", end: "20:00", name: "Canne de combat Débutants", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Pierre-Alexandre  Kofron" },
+                { day: 3, start: "20:00", end: "21:30", name: "Prépa Physique & Technico-Tactique", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Matthieu" },
+
+                // JEUDI
+                { day: 4, start: "18:00", end: "19:00", name: "Préparation physique", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
+                { day: 4, start: "20:00", end: "21:30", name: "Savate BF", place: "Gymnase Salvador Allendé, Saint-Fons", coach: "Franck Meneroud" },
+
+                // VENDREDI
+                { day: 5, start: "19:00", end: "20:15", name: "Savate BF Débutants", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
+                { day: 5, start: "20:15", end: "21:45", name: "Savate BF Confirmés", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
 
 
-  // SAMEDI
-  { day: 6, start: "10:00", end: "11:00", name: "Savate BF Enfants (7/11ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
-  { day: 6, start: "11:00", end: "12:00", name: "Savate BF Ados (12/15ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
-  { day: 6, start: "12:00", end: "13:00", name: "Savate BF Compétiteurs", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" }
+                // SAMEDI
+                { day: 6, start: "10:00", end: "11:00", name: "Savate BF Enfants (7/11ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
+                { day: 6, start: "11:00", end: "12:00", name: "Savate BF Ados (12/15ans)", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" },
+                { day: 6, start: "12:00", end: "13:00", name: "Savate BF Compétiteurs", place: "Gymnase Benjamin Delessert Lyon 7", coach: "Franck Meneroud" }
 
-];
-  const dayNames = [
-    "dimanche",
-    "lundi",
-    "mardi",
-    "mercredi",
-    "jeudi",
-    "vendredi",
-    "samedi"
-  ];
+            ];
+            const dayNames = [
+                "dimanche",
+                "lundi",
+                "mardi",
+                "mercredi",
+                "jeudi",
+                "vendredi",
+                "samedi"
+            ];
 
-  function toMinutes(time) {
-    const [h, m] = time.split(":").map(Number);
-    return h * 60 + m;
-  }
+            function toMinutes(time) {
+                const [h, m] = time.split(":").map(Number);
+                return h * 60 + m;
+            }
 
-  function coursesForDay(day) {
-    return planning
-      .filter(c => c.day === day)
-      .map(c => ({ ...c, startMin: toMinutes(c.start) }))
-      .sort((a, b) => a.startMin - b.startMin);
-  }
+            function coursesForDay(day) {
+                return planning
+                    .filter(c => c.day === day)
+                    .map(c => ({ ...c, startMin: toMinutes(c.start) }))
+                    .sort((a, b) => a.startMin - b.startMin);
+            }
 
-  let html = "";
+            let html = "";
 
-  // 1️⃣ Cours restants aujourd’hui
-  const todayCourses = coursesForDay(today).filter(c => c.startMin > minutesNow);
+            // 1️⃣ Cours restants aujourd’hui
+            const todayCourses = coursesForDay(today).filter(c => c.startMin > minutesNow);
 
-  if (todayCourses.length > 0) {
-    html += "<strong>Prochains cours aujourd’hui : </strong>";
-    todayCourses.forEach(c => {
-      html += `${c.name} — ${c.start}/${c.end} — ${c.place} — ${c.coach}<br>`;
-    });
-  } else {
-    // 2️⃣ Chercher le prochain jour avec cours (max J+7)
-    let found = false;
+            if (todayCourses.length > 0) {
+                html += "<strong>Prochains cours aujourd’hui : </strong>";
+                todayCourses.forEach(c => {
+                    html += `${c.name} — ${c.start}/${c.end} — ${c.place} — ${c.coach}<br>`;
+                });
+            } else {
+                // 2️⃣ Chercher le prochain jour avec cours (max J+7)
+                let found = false;
 
-    for (let i = 1; i <= 7; i++) {
-      const day = (today + i) % 7;
-      const courses = coursesForDay(day);
+                for (let i = 1; i <= 7; i++) {
+                    const day = (today + i) % 7;
+                    const courses = coursesForDay(day);
 
-      if (courses.length > 0) {
-        const label =
-          i === 1 ? "demain" : dayNames[day];
+                    if (courses.length > 0) {
+                        const label =
+                            i === 1 ? "demain" : dayNames[day];
 
-        const c = courses[0];
-        html = `<strong>Prochain cours ${label} :</strong>
-                ${c.name} — ${c.start}/${c.end} — ${c.place} — ${c.coach}`;
-        found = true;
-        break;
-      }
-    }
+                        const c = courses[0];
+                        html = `<strong>Prochain cours ${label} :</strong>
+                    ${c.name} — ${c.start}/${c.end} — ${c.place} — ${c.coach}`;
+                        found = true;
+                        break;
+                    }
+                }
 
-    if (!found) {
-      html = "Aucun cours programmé dans les prochains jours";
-    }
-  }
+                if (!found) {
+                    html = "Aucun cours programmé dans les prochains jours";
+                }
+            }
 
-  document.getElementById("nextCourse").innerHTML = html;
-})();</script>
+            document.getElementById("nextCourse").innerHTML = html;
+        })();</script>
 
-<script>
-(function () {
-  var iframe = document.querySelector(".fb-feed");
-  if (!iframe) return;
+    <script>
+        (function () {
+            var iframe = document.querySelector(".fb-feed");
+            if (!iframe) return;
 
-  var media = window.matchMedia("(max-width: 700px)");
+            var media = window.matchMedia("(max-width: 700px)");
 
-  function updateFbSrc() {
-    var target = media.matches ? iframe.dataset.srcMobile : iframe.dataset.srcDesktop;
-    if (target && iframe.src !== target) {
-      iframe.src = target;
-    }
-  }
+            function updateFbSrc() {
+                var target = media.matches ? iframe.dataset.srcMobile : iframe.dataset.srcDesktop;
+                if (target && iframe.src !== target) {
+                    iframe.src = target;
+                }
+            }
 
-  updateFbSrc();
-  if (media.addEventListener) {
-    media.addEventListener("change", updateFbSrc);
-  } else if (media.addListener) {
-    media.addListener(updateFbSrc);
-  }
-})();
-</script>
+            updateFbSrc();
+            if (media.addEventListener) {
+                media.addEventListener("change", updateFbSrc);
+            } else if (media.addListener) {
+                media.addListener(updateFbSrc);
+            }
+        })();
+    </script>
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 </body>
 </html>

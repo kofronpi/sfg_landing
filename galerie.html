@@ -1,1085 +1,1107 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Moments de convivialité, entraînements et compétitions : une galerie photos du club SFG Savate à Lyon">
-  <title>Galerie - SFG Savate Lyon</title>
-  <style>
-    :root {
-      --red: #e10600;
-      --black: #0b0b0b;
-      --max-width: 1200px;
-      --bg: #ffffff;
-      --text: #070707;
-      --muted: #646464;
-      --tile-size: 12.5rem;
-      --gap: 0.75rem;
-      --tile-radius: 12px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Dosis', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.55;
-    }
-
-    body.no-scroll {
-      overflow: hidden;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-
-    .container {
-      max-width: var(--max-width);
-      margin: auto;
-      padding: 1rem;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      background: #0b0b0b;
-      border-bottom: 1px solid #1e1e1e;
-      z-index: 50;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 1rem;
-      position: relative;
-    }
-
-    .site-brand {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #fff;
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .nav-links a {
-      color: #fff;
-      opacity: 0.9;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible,
-    .nav-links a.is-active {
-      color: var(--red);
-      opacity: 1;
-    }
-
-    .menu-toggle {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 8px;
-      border: 1px solid #1e1e1e;
-      background: transparent;
-      cursor: pointer;
-    }
-
-    .menu-toggle span {
-      position: relative;
-      width: 20px;
-      height: 2px;
-      background: #fff;
-      display: block;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .menu-toggle span::before,
-    .menu-toggle span::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 20px;
-      height: 2px;
-      background: #fff;
-      transition: transform 0.2s ease;
-    }
-
-    .menu-toggle span::before { top: -6px; }
-    .menu-toggle span::after { top: 6px; }
-
-    .menu-toggle.is-active span { background: transparent; }
-    .menu-toggle.is-active span::before { transform: translateY(6px) rotate(45deg); }
-    .menu-toggle.is-active span::after { transform: translateY(-6px) rotate(-45deg); }
-
-    .gallery-layout {
-      min-height: min(80vh, 1200px);
-      display: grid;
-      grid-template-columns: [sidebar-start] 5rem [sidebar-end main-start] 1fr [main-end];
-      border-bottom: 1px solid #ececec;
-    }
-    .logo {
-      display: flex;
-      justify-content: center;
-      font-size: 2.2rem;
-      line-height: 1.1;
-      letter-spacing: 0.04em;
-      font-weight: 700;
-      color: #fff;
-      opacity: 0.9;
-    }
-
-    .main {
-      grid-column: main;
-      padding: 1.25rem;
-      background: #fff;
-    }
-
-    h1 {
-      font-size: clamp(1.45rem, 3.2vw, 2rem);
-      line-height: 1.3;
-      margin-bottom: 0.35rem;
-    }
-
-    .intro {
-      color: var(--muted);
-      margin-bottom: 1rem;
-      max-width: 68ch;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
-      grid-auto-rows: var(--tile-size);
-      grid-auto-flow: dense;
-      gap: var(--gap);
-    }
-
-    .gallery figure {
-      container: figure / inline-size;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      grid-template-rows: minmax(0, 1fr);
-      border-radius: var(--tile-radius);
-      background: #d3d3d3;
-      cursor: zoom-in;
-      position: relative;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.35s ease, transform 0.45s ease;
-    }
-
-    .gallery figure.is-ready {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .gallery figure:focus-visible {
-      outline: 3px solid color-mix(in srgb, var(--red) 76%, #fff 24%);
-      outline-offset: 2px;
-    }
-
-    .gallery img {
-      inline-size: 100%;
-      block-size: 100%;
-      object-fit: cover;
-      image-orientation: from-image;
-      grid-area: 1 / 1 / -1 / -1;
-      transition: transform 0.8s ease-in-out;
-    }
-
-    .gallery figcaption {
-      grid-area: 1 / 1 / -1 / -1;
-      align-self: end;
-      z-index: 1;
-      padding: 3em 18% 0.9em 0.9em;
-      color: #fff;
-      font-size: 0.84rem;
-      line-height: 1.3;
-      background: linear-gradient(transparent 22%, rgb(0 0 0 / 0.74));
-      display: none;
-      pointer-events: none;
-    }
-
-    @container figure (width > 20rem) {
-      .gallery figcaption {
-        display: block;
-      }
-    }
-
-    .gallery figcaption h3 {
-      font-size: 1rem;
-      font-weight: 700;
-    }
-
-    .gallery figcaption p {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .gallery figure:hover img {
-        transform: scale(1.11);
-      }
-    }
-
-    .empty-state {
-      min-height: 40vh;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      color: #666;
-      padding: 2rem;
-      border: 2px dashed #d4d4d4;
-      border-radius: 12px;
-      background: #fafafa;
-    }
-
-    .empty-state[hidden] {
-      display: none !important;
-    }
-
-    .empty-state strong {
-      color: #333;
-      display: block;
-      margin-bottom: 0.45rem;
-    }
-
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(8, 8, 8, 0.94);
-      padding: 1rem;
-      z-index: 100;
-    }
-
-    .lightbox.is-open {
-      display: flex;
-    }
-
-    .lightbox-frame {
-      position: relative;
-      width: min(96vw, 1600px);
-      height: min(92vh, 980px);
-      display: grid;
-      place-items: center;
-    }
-
-    .lightbox-frame.is-portrait {
-      width: min(72vw, 920px);
-    }
-
-    .lightbox img {
-      width: auto;
-      height: auto;
-      max-width: 100%;
-      max-height: 90vh;
-      object-fit: contain;
-      image-orientation: from-image;
-      border-radius: 12px;
-      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.45);
-      background: #111;
-    }
-
-    .lb-btn {
-      position: absolute;
-      border: 0;
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.2s ease;
-      backdrop-filter: blur(3px);
-    }
-
-    .lb-btn:focus-visible {
-      outline: 2px solid #fff;
-      outline-offset: 2px;
-    }
-
-    .lb-close {
-      top: max(8px, env(safe-area-inset-top));
-      right: max(8px, env(safe-area-inset-right));
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      font-size: 1.65rem;
-      line-height: 1;
-      z-index: 20;
-      pointer-events: auto;
-    }
-
-    .lb-nav {
-      top: 50%;
-      transform: translateY(-50%);
-      width: 42px;
-      height: 68px;
-      border-radius: 10px;
-      font-size: 1.75rem;
-    }
-
-    .lb-prev { left: 0.4rem; }
-    .lb-next { right: 0.4rem; }
-
-    .lb-btn:hover {
-      background: rgba(255, 255, 255, 0.26);
-    }
-
-    .gallery-social-cta {
-      padding: 1.2rem 1rem 2rem;
-    }
-
-    .gallery-social-cta .container {
-      max-width: 760px;
-    }
-
-    .gallery-social-card {
-      border: 1px solid #ececec;
-      border-radius: 14px;
-      background: linear-gradient(180deg, #fff, #f9f9f9);
-      padding: 1rem 1.25rem;
-      display: grid;
-      justify-items: center;
-      gap: 0.85rem;
-      text-align: center;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-    }
-
-    .gallery-social-title {
-      font-size: 1rem;
-      color: #222;
-      font-weight: 600;
-    }
-
-    .gallery-social-list {
-      display: flex;
-      justify-content: center;
-      gap: 0.7rem;
-      flex-wrap: wrap;
-    }
-
-    .gallery-social-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
-      min-width: 150px;
-      padding: 0.58rem 0.95rem;
-      border-radius: 999px;
-      border: 1px solid #d8d8d8;
-      background: #fff;
-      color: #111;
-      font-weight: 700;
-      font-size: 0.95rem;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .gallery-social-link ion-icon {
-      font-size: 1.1rem;
-    }
-
-    .gallery-social-link:hover,
-    .gallery-social-link:focus-visible {
-      border-color: color-mix(in srgb, var(--red) 60%, #d8d8d8 40%);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
-    }
-
-    .footer {
-      font-size: 0.95rem;
-      color: #d3d3d3;
-    }
-
-    .footer-top {
-      background: radial-gradient(circle at top left, rgba(225, 6, 0, 0.2), transparent 55%), #0c0c0c;
-      color: #c7c7c7;
-      padding: 3.5rem 0 3rem;
-    }
-
-    .footer-top .container {
-      display: grid;
-      gap: 2rem;
-      align-items: start;
-    }
-
-    .footer-brand {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .footer-logo {
-      width: min(240px, 80%);
-    }
-
-    .footer-brand-text {
-      color: #b8b8b8;
-    }
-
-    .footer-list-title {
-      color: #fff;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      position: relative;
-      padding-bottom: 0.5rem;
-    }
-
-    .footer-list-title::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 60px;
-      height: 2px;
-      background: var(--red);
-    }
-
-    .footer-list {
-      display: grid;
-      gap: 0.8rem;
-    }
-
-    .footer-list-item {
-      display: grid;
-      gap: 0.3rem;
-    }
-
-    .footer-link {
-      color: #d6d6d6;
-    }
-
-    .footer-link:hover,
-    .footer-link:focus-visible {
-      color: #fff;
-    }
-
-    .footer-map iframe {
-      width: 100%;
-      height: 220px;
-      border: 0;
-      border-radius: 10px;
-    }
-
-    .social-list {
-      display: flex;
-      gap: 0.8rem;
-      margin-top: 0.4rem;
-    }
-
-    .social-link {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-    }
-
-    .footer-bottom {
-      background: #070707;
-      color: #9e9e9e;
-      padding: 1rem 0;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    .footer-bottom a {
-      color: #cfcfcf;
-    }
-
-    @media (min-width: 900px) {
-      .footer-top .container {
-        grid-template-columns: 1.1fr 1fr 0.8fr;
-      }
-
-      .footer-map iframe {
-        height: 260px;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .gallery-layout {
-        grid-template-columns: 1fr;
-      }
-
-
-      .main {
-        padding: 1rem;
-      }
-
-      .lightbox-frame.is-portrait {
-        width: min(96vw, 1600px);
-      }
-    }
-
-    @media (width > 600px) {
-      .gallery figure:nth-child(1) {
-        grid-area: span 2 / span 2;
-      }
-
-      .gallery figure:nth-child(4n + 1) {
-        grid-row: span 2;
-      }
-
-      .gallery figure:nth-child(4n + 2) {
-        grid-column: span 2;
-      }
-    }
-
-    @media (max-width: 800px) {
-      .nav {
-        justify-content: space-between;
-      }
-
-      .site-brand {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: inline-flex;
-      }
-
-      .nav-links {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        left: 0;
-        flex-direction: column;
-        gap: 0;
-        background: #0b0b0b;
-        border-bottom: 1px solid #1e1e1e;
-        transform: translateY(-10px);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease, transform 0.2s ease;
-      }
-
-      .nav-links a {
-        padding: 0.9rem 1rem;
-        border-top: 1px solid #1e1e1e;
-      }
-
-      .nav-links.is-open {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .gallery {
-        grid-template-columns: 1fr;
-        grid-auto-rows: auto;
-      }
-
-      .gallery figure {
-        display: block;
-        height: auto;
-        grid-column: 1 !important;
-        grid-row: auto !important;
-        background: transparent;
-      }
-
-      .gallery img {
-        display: block;
-        width: 100%;
-        height: auto;
-        block-size: auto;
-        object-fit: contain;
-      }
-
-      .lb-nav {
-        display: none;
-      }
-
-      .gallery-social-cta {
-        padding: 1rem 1rem 1.5rem;
-      }
-
-      .gallery-social-card {
-        padding: 0.9rem;
-      }
-
-      .gallery-social-link {
-        width: 100%;
-        min-width: 0;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .gallery figure,
-      .gallery img {
-        transition: none;
-      }
-
-      .gallery figure.is-ready {
-        opacity: 1;
-        transform: none;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Moments de convivialité, entraînements et compétitions : une galerie photos du club SFG Savate à Lyon">
+    <title>Galerie - SFG Savate Lyon</title>
+    <style>
+        :root {
+            --red: #e10600;
+            --black: #0b0b0b;
+            --max-width: 1200px;
+            --bg: #ffffff;
+            --text: #070707;
+            --muted: #646464;
+            --tile-size: 12.5rem;
+            --gap: 0.75rem;
+            --tile-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Dosis', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.55;
+        }
+
+            body.no-scroll {
+                overflow: hidden;
+            }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 1rem;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background: #0b0b0b;
+            border-bottom: 1px solid #1e1e1e;
+            z-index: 50;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .site-brand {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+            .nav-links a {
+                color: #fff;
+                opacity: 0.9;
+            }
+
+                .nav-links a:hover,
+                .nav-links a:focus-visible,
+                .nav-links a.is-active {
+                    color: var(--red);
+                    opacity: 1;
+                }
+
+        .menu-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            border: 1px solid #1e1e1e;
+            background: transparent;
+            cursor: pointer;
+        }
+
+            .menu-toggle span {
+                position: relative;
+                width: 20px;
+                height: 2px;
+                background: #fff;
+                display: block;
+                transition: transform 0.2s ease, opacity 0.2s ease;
+            }
+
+                .menu-toggle span::before,
+                .menu-toggle span::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    width: 20px;
+                    height: 2px;
+                    background: #fff;
+                    transition: transform 0.2s ease;
+                }
+
+                .menu-toggle span::before {
+                    top: -6px;
+                }
+
+                .menu-toggle span::after {
+                    top: 6px;
+                }
+
+            .menu-toggle.is-active span {
+                background: transparent;
+            }
+
+                .menu-toggle.is-active span::before {
+                    transform: translateY(6px) rotate(45deg);
+                }
+
+                .menu-toggle.is-active span::after {
+                    transform: translateY(-6px) rotate(-45deg);
+                }
+
+        .gallery-layout {
+            min-height: min(80vh, 1200px);
+            display: grid;
+            grid-template-columns: [sidebar-start] 5rem [sidebar-end main-start] 1fr [main-end];
+            border-bottom: 1px solid #ececec;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            font-size: 2.2rem;
+            line-height: 1.1;
+            letter-spacing: 0.04em;
+            font-weight: 700;
+            color: #fff;
+            opacity: 0.9;
+        }
+
+        .main {
+            grid-column: main;
+            padding: 1.25rem;
+            background: #fff;
+        }
+
+        h1 {
+            font-size: clamp(1.45rem, 3.2vw, 2rem);
+            line-height: 1.3;
+            margin-bottom: 0.35rem;
+        }
+
+        .intro {
+            color: var(--muted);
+            margin-bottom: 1rem;
+            max-width: 68ch;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+            grid-auto-rows: var(--tile-size);
+            grid-auto-flow: dense;
+            gap: var(--gap);
+        }
+
+            .gallery figure {
+                container: figure / inline-size;
+                overflow: hidden;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr);
+                grid-template-rows: minmax(0, 1fr);
+                border-radius: var(--tile-radius);
+                background: #d3d3d3;
+                cursor: zoom-in;
+                position: relative;
+                opacity: 0;
+                transform: translateY(10px);
+                transition: opacity 0.35s ease, transform 0.45s ease;
+            }
+
+                .gallery figure.is-ready {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                .gallery figure:focus-visible {
+                    outline: 3px solid color-mix(in srgb, var(--red) 76%, #fff 24%);
+                    outline-offset: 2px;
+                }
+
+            .gallery img {
+                inline-size: 100%;
+                block-size: 100%;
+                object-fit: cover;
+                image-orientation: from-image;
+                grid-area: 1 / 1 / -1 / -1;
+                transition: transform 0.8s ease-in-out;
+            }
+
+            .gallery figcaption {
+                grid-area: 1 / 1 / -1 / -1;
+                align-self: end;
+                z-index: 1;
+                padding: 3em 18% 0.9em 0.9em;
+                color: #fff;
+                font-size: 0.84rem;
+                line-height: 1.3;
+                background: linear-gradient(transparent 22%, rgb(0 0 0 / 0.74));
+                display: none;
+                pointer-events: none;
+            }
+
+        @container figure (width > 20rem) {
+            .gallery figcaption {
+                display: block;
+            }
+        }
+
+        .gallery figcaption h3 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .gallery figcaption p {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .gallery figure:hover img {
+                transform: scale(1.11);
+            }
+        }
+
+        .empty-state {
+            min-height: 40vh;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            color: #666;
+            padding: 2rem;
+            border: 2px dashed #d4d4d4;
+            border-radius: 12px;
+            background: #fafafa;
+        }
+
+            .empty-state[hidden] {
+                display: none !important;
+            }
+
+            .empty-state strong {
+                color: #333;
+                display: block;
+                margin-bottom: 0.45rem;
+            }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(8, 8, 8, 0.94);
+            padding: 1rem;
+            z-index: 100;
+        }
+
+            .lightbox.is-open {
+                display: flex;
+            }
+
+        .lightbox-frame {
+            position: relative;
+            width: min(96vw, 1600px);
+            height: min(92vh, 980px);
+            display: grid;
+            place-items: center;
+        }
+
+            .lightbox-frame.is-portrait {
+                width: min(72vw, 920px);
+            }
+
+        .lightbox img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            image-orientation: from-image;
+            border-radius: 12px;
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.45);
+            background: #111;
+        }
+
+        .lb-btn {
+            position: absolute;
+            border: 0;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            backdrop-filter: blur(3px);
+        }
+
+            .lb-btn:focus-visible {
+                outline: 2px solid #fff;
+                outline-offset: 2px;
+            }
+
+        .lb-close {
+            top: max(8px, env(safe-area-inset-top));
+            right: max(8px, env(safe-area-inset-right));
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            font-size: 1.65rem;
+            line-height: 1;
+            z-index: 20;
+            pointer-events: auto;
+        }
+
+        .lb-nav {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 68px;
+            border-radius: 10px;
+            font-size: 1.75rem;
+        }
+
+        .lb-prev {
+            left: 0.4rem;
+        }
+
+        .lb-next {
+            right: 0.4rem;
+        }
+
+        .lb-btn:hover {
+            background: rgba(255, 255, 255, 0.26);
+        }
+
+        .gallery-social-cta {
+            padding: 1.2rem 1rem 2rem;
+        }
+
+            .gallery-social-cta .container {
+                max-width: 760px;
+            }
+
+        .gallery-social-card {
+            border: 1px solid #ececec;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #fff, #f9f9f9);
+            padding: 1rem 1.25rem;
+            display: grid;
+            justify-items: center;
+            gap: 0.85rem;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+        }
+
+        .gallery-social-title {
+            font-size: 1rem;
+            color: #222;
+            font-weight: 600;
+        }
+
+        .gallery-social-list {
+            display: flex;
+            justify-content: center;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        .gallery-social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            min-width: 150px;
+            padding: 0.58rem 0.95rem;
+            border-radius: 999px;
+            border: 1px solid #d8d8d8;
+            background: #fff;
+            color: #111;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .gallery-social-link ion-icon {
+                font-size: 1.1rem;
+            }
+
+            .gallery-social-link:hover,
+            .gallery-social-link:focus-visible {
+                border-color: color-mix(in srgb, var(--red) 60%, #d8d8d8 40%);
+                transform: translateY(-1px);
+                box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+            }
+
+        .footer {
+            font-size: 0.95rem;
+            color: #d3d3d3;
+        }
+
+        .footer-top {
+            background: radial-gradient(circle at top left, rgba(225, 6, 0, 0.2), transparent 55%), #0c0c0c;
+            color: #c7c7c7;
+            padding: 3.5rem 0 3rem;
+        }
+
+            .footer-top .container {
+                display: grid;
+                gap: 2rem;
+                align-items: start;
+            }
+
+        .footer-brand {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            width: min(240px, 80%);
+        }
+
+        .footer-brand-text {
+            color: #b8b8b8;
+        }
+
+        .footer-list-title {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+            .footer-list-title::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 60px;
+                height: 2px;
+                background: var(--red);
+            }
+
+        .footer-list {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .footer-list-item {
+            display: grid;
+            gap: 0.3rem;
+        }
+
+        .footer-link {
+            color: #d6d6d6;
+        }
+
+            .footer-link:hover,
+            .footer-link:focus-visible {
+                color: #fff;
+            }
+
+        .footer-map iframe {
+            width: 100%;
+            height: 220px;
+            border: 0;
+            border-radius: 10px;
+        }
+
+        .social-list {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.4rem;
+        }
+
+        .social-link {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .footer-bottom {
+            background: #070707;
+            color: #9e9e9e;
+            padding: 1rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+            .footer-bottom a {
+                color: #cfcfcf;
+            }
+
+        @media (min-width: 900px) {
+            .footer-top .container {
+                grid-template-columns: 1.1fr 1fr 0.8fr;
+            }
+
+            .footer-map iframe {
+                height: 260px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .gallery-layout {
+                grid-template-columns: 1fr;
+            }
+
+
+            .main {
+                padding: 1rem;
+            }
+
+            .lightbox-frame.is-portrait {
+                width: min(96vw, 1600px);
+            }
+        }
+
+        @media (width > 600px) {
+            .gallery figure:nth-child(1) {
+                grid-area: span 2 / span 2;
+            }
+
+            .gallery figure:nth-child(4n + 1) {
+                grid-row: span 2;
+            }
+
+            .gallery figure:nth-child(4n + 2) {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .nav {
+                justify-content: space-between;
+            }
+
+            .site-brand {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: inline-flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                flex-direction: column;
+                gap: 0;
+                background: #0b0b0b;
+                border-bottom: 1px solid #1e1e1e;
+                transform: translateY(-10px);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s ease, transform 0.2s ease;
+            }
+
+                .nav-links a {
+                    padding: 0.9rem 1rem;
+                    border-top: 1px solid #1e1e1e;
+                }
+
+                .nav-links.is-open {
+                    transform: translateY(0);
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+        }
+
+        @media (max-width: 760px) {
+            .gallery {
+                grid-template-columns: 1fr;
+                grid-auto-rows: auto;
+            }
+
+                .gallery figure {
+                    display: block;
+                    height: auto;
+                    grid-column: 1 !important;
+                    grid-row: auto !important;
+                    background: transparent;
+                }
+
+                .gallery img {
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                    block-size: auto;
+                    object-fit: contain;
+                }
+
+            .lb-nav {
+                display: none;
+            }
+
+            .gallery-social-cta {
+                padding: 1rem 1rem 1.5rem;
+            }
+
+            .gallery-social-card {
+                padding: 0.9rem;
+            }
+
+            .gallery-social-link {
+                width: 100%;
+                min-width: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .gallery figure,
+            .gallery img {
+                transition: none;
+            }
+
+                .gallery figure.is-ready {
+                    opacity: 1;
+                    transform: none;
+                }
+        }
+    </style>
 </head>
 <body>
-<header>
-  <div class="container nav">
-    <a class="site-brand" href="./index.html">Club SFG Savate Lyon</a>
-    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="primaryNav">
-      <span></span>
-    </button>
-    <nav class="nav-links" id="primaryNav">
-      <a href="./index.html#leclub">Le club</a>
-      <a class="is-active" href="./galerie.html">Galerie</a>
-      <a href="./index.html#pratiques">Disciplines</a>
-      <a href="./planning.html">Horaires</a>
-      <a href="./index.html#cta-form">Inscription</a>
-      <a href="./index.html#actualites">Actualités</a>
-      <a href="./index.html#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main class="gallery-layout">
-  <section class="main" aria-label="Galerie photo">
-    <h1>Galerie</h1>
-    <p class="intro">Moments de convivialité, entraînements et compétitions : voici quelques photos emblématiques du club SFG Savate à Lyon !  </p>
-
-    <div id="galleryGrid" class="gallery"></div>
-
-    <div id="emptyState" class="empty-state" hidden>
-    </div>
-  </section>
-</main>
-
-<section class="gallery-social-cta" aria-label="Réseaux sociaux photo">
-  <div class="container">
-    <div class="gallery-social-card">
-      <p class="gallery-social-title">Retrouvez toutes nos photos sur :</p>
-      <div class="gallery-social-list">
-        <a class="gallery-social-link" href="https://www.facebook.com/p/SFG-Savate-100057343214536/" target="_blank" rel="noopener noreferrer" aria-label="Voir les photos sur Facebook">
-          <ion-icon name="logo-facebook"></ion-icon>
-          <span>Facebook</span>
-        </a>
-        <a class="gallery-social-link" href="https://www.instagram.com/sfg_savate/?hl=fr" target="_blank" rel="noopener noreferrer" aria-label="Voir les photos sur Instagram">
-          <ion-icon name="logo-instagram"></ion-icon>
-          <span>Instagram</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div
-  id="lightbox"
-  class="lightbox"
-  role="dialog"
-  aria-modal="true"
-  aria-label="Image agrandie"
-  aria-hidden="true"
->
-  <button id="closeLightbox" class="lb-btn lb-close" type="button" aria-label="Fermer la galerie">×</button>
-  <div id="lightboxFrame" class="lightbox-frame">
-    <button id="prevLightbox" class="lb-btn lb-nav lb-prev" type="button" aria-label="Photo précédente">‹</button>
-    <img id="lightboxImage" src="" alt="">
-    <button id="nextLightbox" class="lb-btn lb-nav lb-next" type="button" aria-label="Photo suivante">›</button>
-  </div>
-</div>
-
-<footer class="footer" id="contact">
-  <div class="footer-top">
-    <div class="container">
-      <div class="footer-brand">
-        <img class="footer-logo" src="./assets/img/sfg_logo_blanc.png" alt="Logo SFG Savate">
-        <p class="footer-brand-text">
-          Club Lyonnais de Savate Boxe Française, Savate Forme, Canne de Combat et Préparation Physique.
-        </p>
-      </div>
-
-      <div class="footer-list">
-        <div class="footer-list-title">Nous contacter</div>
-        <div class="footer-list-item">
-          <a class="footer-link" href="https://maps.app.goo.gl/hFuSgLeDwSfsWmwE6">40 rue de Gerland, 69007 Lyon</a>
+    <header>
+        <div class="container nav">
+            <a class="site-brand" href="./index.html">Club SFG Savate Lyon</a>
+            <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="primaryNav">
+                <span></span>
+            </button>
+            <nav class="nav-links" id="primaryNav">
+                <a href="./index.html#leclub">Le club</a>
+                <a class="is-active" href="./galerie.html">Galerie</a>
+                <a href="./index.html#pratiques">Disciplines</a>
+                <a href="./planning.html">Horaires</a>
+                <a href="./Fiche_Inscription_SFG_2026_2027_.pdf">Adhésion 26/27</a>
+                <a href="./index.html#actualites">Actualités</a>
+                <a href="./index.html#contact">Contact</a>
+            </nav>
         </div>
-        <div class="footer-list-item footer-map">
-          <iframe
-            src="https://www.openstreetmap.org/export/embed.html?bbox=4.834%2C45.737%2C4.848%2C45.744&layer=mapnik&marker=45.740589%2C4.84055"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Plan SFG Savate"
-          ></iframe>
-        </div>
-        <div class="footer-list-item">
-          <a class="footer-link" href="tel:0662052080">06 62 05 20 80 - Franck</a>
-        </div>
-      </div>
+    </header>
 
-      <div class="footer-list">
-        <div class="footer-list-title">Réseaux</div>
-        <div class="social-list">
-          <a class="social-link" href="https://www.facebook.com/p/SFG-Savate-100057343214536/" aria-label="Facebook">
-            <ion-icon name="logo-facebook"></ion-icon>
-          </a>
-          <a class="social-link" href="https://www.instagram.com/sfg_savate/?hl=fr" aria-label="Instagram">
-            <ion-icon name="logo-instagram"></ion-icon>
-          </a>
+    <main class="gallery-layout">
+        <section class="main" aria-label="Galerie photo">
+            <h1>Galerie</h1>
+            <p class="intro">Moments de convivialité, entraînements et compétitions : voici quelques photos emblématiques du club SFG Savate à Lyon !  </p>
+
+            <div id="galleryGrid" class="gallery"></div>
+
+            <div id="emptyState" class="empty-state" hidden>
+            </div>
+        </section>
+    </main>
+
+    <section class="gallery-social-cta" aria-label="Réseaux sociaux photo">
+        <div class="container">
+            <div class="gallery-social-card">
+                <p class="gallery-social-title">Retrouvez toutes nos photos sur :</p>
+                <div class="gallery-social-list">
+                    <a class="gallery-social-link" href="https://www.facebook.com/p/SFG-Savate-100057343214536/" target="_blank" rel="noopener noreferrer" aria-label="Voir les photos sur Facebook">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                        <span>Facebook</span>
+                    </a>
+                    <a class="gallery-social-link" href="https://www.instagram.com/sfg_savate/?hl=fr" target="_blank" rel="noopener noreferrer" aria-label="Voir les photos sur Instagram">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <div id="lightbox"
+         class="lightbox"
+         role="dialog"
+         aria-modal="true"
+         aria-label="Image agrandie"
+         aria-hidden="true">
+        <button id="closeLightbox" class="lb-btn lb-close" type="button" aria-label="Fermer la galerie">×</button>
+        <div id="lightboxFrame" class="lightbox-frame">
+            <button id="prevLightbox" class="lb-btn lb-nav lb-prev" type="button" aria-label="Photo précédente">‹</button>
+            <img id="lightboxImage" src="" alt="">
+            <button id="nextLightbox" class="lb-btn lb-nav lb-next" type="button" aria-label="Photo suivante">›</button>
+        </div>
     </div>
-  </div>
 
-  <div class="footer-bottom">
-    <div class="container">
-      <div>&copy; 2026 SFG Savate.</div>
-      <div><a href="./mentions-legales.html">Mentions légales</a></div>
-    </div>
-  </div>
-</footer>
+    <footer class="footer" id="contact">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-brand">
+                    <img class="footer-logo" src="./assets/img/sfg_logo_blanc.png" alt="Logo SFG Savate">
+                    <p class="footer-brand-text">
+                        Club Lyonnais de Savate Boxe Française, Savate Forme, Canne de Combat et Préparation Physique.
+                    </p>
+                </div>
 
-<script>
-  (function () {
-    const toggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.nav-links');
+                <div class="footer-list">
+                    <div class="footer-list-title">Nous contacter</div>
+                    <div class="footer-list-item">
+                        <a class="footer-link" href="https://maps.app.goo.gl/hFuSgLeDwSfsWmwE6">40 rue de Gerland, 69007 Lyon</a>
+                    </div>
+                    <div class="footer-list-item footer-map">
+                        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=4.834%2C45.737%2C4.848%2C45.744&layer=mapnik&marker=45.740589%2C4.84055"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Plan SFG Savate"></iframe>
+                    </div>
+                    <div class="footer-list-item">
+                        <a class="footer-link" href="tel:0662052080">06 62 05 20 80 - Franck</a>
+                    </div>
+                </div>
 
-    if (!toggle || !nav) return;
+                <div class="footer-list">
+                    <div class="footer-list-title">Réseaux</div>
+                    <div class="social-list">
+                        <a class="social-link" href="https://www.facebook.com/p/SFG-Savate-100057343214536/" aria-label="Facebook">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                        <a class="social-link" href="https://www.instagram.com/sfg_savate/?hl=fr" aria-label="Instagram">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    const setState = (isOpen) => {
-      nav.classList.toggle('is-open', isOpen);
-      toggle.classList.toggle('is-active', isOpen);
-      toggle.setAttribute('aria-expanded', String(isOpen));
-    };
+        <div class="footer-bottom">
+            <div class="container">
+                <div>&copy; 2026 SFG Savate.</div>
+                <div><a href="./mentions-legales.html">Mentions légales</a></div>
+            </div>
+        </div>
+    </footer>
 
-    toggle.addEventListener('click', () => {
-      const isOpen = nav.classList.contains('is-open');
-      setState(!isOpen);
-    });
+    <script>
+        (function () {
+            const toggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.nav-links');
 
-    nav.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => setState(false));
-    });
-  })();
+            if (!toggle || !nav) return;
 
-  (function () {
-    /**
-     * CONFIGURATION
-     * 1) Manual list mode:
-     *    - Set USE_NUMERIC_PATTERN = false
-     *    - Fill GALLERY_FILES with filenames from assets/img/ prefixed by gallery_
-     *
-     * 2) Numeric pattern mode:
-     *    - Set USE_NUMERIC_PATTERN = true
-     *    - Configure prefix/start/end/pad/extension below
-     *    - Example => gallery_01.jpg ... gallery_50.jpg
-     */
-    const GALLERY_FILES = [
-      'gallery_sfg_1.jpg',
-      'gallery_sfg_2.jpg',
-      'gallery_sfg_3.jpg',
-      'gallery_sfg_4.jpg',
-      'gallery_sfg_5.jpg',
-      'gallery_sfg_6.jpg',
-      'gallery_sfg_7.jpg',
-      'gallery_sfg_8.jpg',
-      'gallery_sfg_9.jpg',
-      'gallery_sfg_10.jpg',
-      'gallery_sfg_11.jpg',
-      'gallery_sfg_12.jpg',
-      'gallery_sfg_13.jpg',
-      'gallery_sfg_14.jpg',
-      'gallery_sfg_15.jpg',
-      'gallery_sfg_16.jpg'
-    ];
+            const setState = (isOpen) => {
+                nav.classList.toggle('is-open', isOpen);
+                toggle.classList.toggle('is-active', isOpen);
+                toggle.setAttribute('aria-expanded', String(isOpen));
+            };
 
-    const FALLBACK_GALLERY_FILES = [
-      'gallery_sfg_1.jpg',
-      'gallery_sfg_2.jpg',
-      'gallery_sfg_3.jpg',
-      'gallery_sfg_4.jpg',
-      'gallery_sfg_5.jpg',
-      'gallery_sfg_6.jpg',
-      'gallery_image_7.jpg'
-    ];
+            toggle.addEventListener('click', () => {
+                const isOpen = nav.classList.contains('is-open');
+                setState(!isOpen);
+            });
 
-    const USE_NUMERIC_PATTERN = false;
+            nav.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => setState(false));
+            });
+        })();
 
-    const PATTERN_SETTINGS = {
-      prefix: 'gallery_',
-      start: 1,
-      end: 20,
-      pad: 2,
-      extension: 'jpg'
-    };
+        (function () {
+            /**
+             * CONFIGURATION
+             * 1) Manual list mode:
+             *    - Set USE_NUMERIC_PATTERN = false
+             *    - Fill GALLERY_FILES with filenames from assets/img/ prefixed by gallery_
+             *
+             * 2) Numeric pattern mode:
+             *    - Set USE_NUMERIC_PATTERN = true
+             *    - Configure prefix/start/end/pad/extension below
+             *    - Example => gallery_01.jpg ... gallery_50.jpg
+             */
+            const GALLERY_FILES = [
+                'gallery_sfg_1.jpg',
+                'gallery_sfg_2.jpg',
+                'gallery_sfg_3.jpg',
+                'gallery_sfg_4.jpg',
+                'gallery_sfg_5.jpg',
+                'gallery_sfg_6.jpg',
+                'gallery_sfg_7.jpg',
+                'gallery_sfg_8.jpg',
+                'gallery_sfg_9.jpg',
+                'gallery_sfg_10.jpg',
+                'gallery_sfg_11.jpg',
+                'gallery_sfg_12.jpg',
+                'gallery_sfg_13.jpg',
+                'gallery_sfg_14.jpg',
+                'gallery_sfg_15.jpg',
+                'gallery_sfg_16.jpg'
+            ];
 
-    const IMAGE_BASE_PATH = './assets/img/';
-    const galleryGrid = document.getElementById('galleryGrid');
-    const emptyState = document.getElementById('emptyState');
+            const FALLBACK_GALLERY_FILES = [
+                'gallery_sfg_1.jpg',
+                'gallery_sfg_2.jpg',
+                'gallery_sfg_3.jpg',
+                'gallery_sfg_4.jpg',
+                'gallery_sfg_5.jpg',
+                'gallery_sfg_6.jpg',
+                'gallery_image_7.jpg'
+            ];
 
-    const lightbox = document.getElementById('lightbox');
-    const lightboxFrame = document.getElementById('lightboxFrame');
-    const lightboxImg = document.getElementById('lightboxImage');
-    const closeBtn = document.getElementById('closeLightbox');
-    const prevBtn = document.getElementById('prevLightbox');
-    const nextBtn = document.getElementById('nextLightbox');
+            const USE_NUMERIC_PATTERN = false;
 
-    let items = [];
-    let currentIndex = -1;
-    let previouslyFocused = null;
-    let touchStartX = 0;
+            const PATTERN_SETTINGS = {
+                prefix: 'gallery_',
+                start: 1,
+                end: 20,
+                pad: 2,
+                extension: 'jpg'
+            };
 
-    function buildPatternFiles(settings) {
-      const files = [];
-      for (let i = settings.start; i <= settings.end; i += 1) {
-        const num = String(i).padStart(settings.pad, '0');
-        files.push(settings.prefix + num + '.' + settings.extension);
-      }
-      return files;
-    }
+            const IMAGE_BASE_PATH = './assets/img/';
+            const galleryGrid = document.getElementById('galleryGrid');
+            const emptyState = document.getElementById('emptyState');
 
-    function normalizeFiles() {
-      const manual = GALLERY_FILES.slice();
-      const source = USE_NUMERIC_PATTERN
-        ? buildPatternFiles(PATTERN_SETTINGS)
-        : (manual.length ? manual : FALLBACK_GALLERY_FILES.slice());
+            const lightbox = document.getElementById('lightbox');
+            const lightboxFrame = document.getElementById('lightboxFrame');
+            const lightboxImg = document.getElementById('lightboxImage');
+            const closeBtn = document.getElementById('closeLightbox');
+            const prevBtn = document.getElementById('prevLightbox');
+            const nextBtn = document.getElementById('nextLightbox');
 
-      return source
-        .map((name) => String(name || '').trim())
-        .filter((name) => name.length > 0)
-        .filter((name, idx, arr) => arr.indexOf(name) === idx);
-    }
+            let items = [];
+            let currentIndex = -1;
+            let previouslyFocused = null;
+            let touchStartX = 0;
 
-    function altFromFilename(filename, index) {
-      const cleaned = filename
-        .replace(/^gallery[_-]?/i, '')
-        .replace(/\.[a-z0-9]+$/i, '')
-        .replace(/[_-]+/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim();
+            function buildPatternFiles(settings) {
+                const files = [];
+                for (let i = settings.start; i <= settings.end; i += 1) {
+                    const num = String(i).padStart(settings.pad, '0');
+                    files.push(settings.prefix + num + '.' + settings.extension);
+                }
+                return files;
+            }
 
-      if (!cleaned) return 'Photo de la galerie ' + (index + 1);
-      return 'Photo de la galerie: ' + cleaned;
-    }
+            function normalizeFiles() {
+                const manual = GALLERY_FILES.slice();
+                const source = USE_NUMERIC_PATTERN
+                    ? buildPatternFiles(PATTERN_SETTINGS)
+                    : (manual.length ? manual : FALLBACK_GALLERY_FILES.slice());
 
-    function renderEmptyState(message) {
-      galleryGrid.hidden = true;
-      emptyState.hidden = false;
-      emptyState.querySelector('p').innerHTML = '<strong>' + message + '</strong>Renseignez <code>GALLERY_FILES</code> ou activez le motif numérique dans le script.';
-    }
+                return source
+                    .map((name) => String(name || '').trim())
+                    .filter((name) => name.length > 0)
+                    .filter((name, idx, arr) => arr.indexOf(name) === idx);
+            }
 
-    function setLightboxImage(index) {
-      if (!items[index]) return;
-      currentIndex = index;
-      lightboxImg.src = items[index].src;
-      lightboxImg.alt = items[index].alt;
-      lightboxFrame.classList.toggle('is-portrait', items[index].ratio < 1);
-    }
+            function altFromFilename(filename, index) {
+                const cleaned = filename
+                    .replace(/^gallery[_-]?/i, '')
+                    .replace(/\.[a-z0-9]+$/i, '')
+                    .replace(/[_-]+/g, ' ')
+                    .replace(/\s+/g, ' ')
+                    .trim();
 
-    function openLightbox(index) {
-      if (!items.length) return;
-      previouslyFocused = document.activeElement;
-      setLightboxImage(index);
-      lightbox.classList.add('is-open');
-      lightbox.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('no-scroll');
-      closeBtn.focus();
-    }
+                if (!cleaned) return 'Photo de la galerie ' + (index + 1);
+                return 'Photo de la galerie: ' + cleaned;
+            }
 
-    function closeLightbox() {
-      lightbox.classList.remove('is-open');
-      lightbox.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('no-scroll');
-      lightboxImg.removeAttribute('src');
-      lightboxImg.alt = '';
+            function renderEmptyState(message) {
+                galleryGrid.hidden = true;
+                emptyState.hidden = false;
+                emptyState.querySelector('p').innerHTML = '<strong>' + message + '</strong>Renseignez <code>GALLERY_FILES</code> ou activez le motif numérique dans le script.';
+            }
 
-      if (previouslyFocused && typeof previouslyFocused.focus === 'function') {
-        previouslyFocused.focus();
-      }
-    }
+            function setLightboxImage(index) {
+                if (!items[index]) return;
+                currentIndex = index;
+                lightboxImg.src = items[index].src;
+                lightboxImg.alt = items[index].alt;
+                lightboxFrame.classList.toggle('is-portrait', items[index].ratio < 1);
+            }
 
-    function showPrev() {
-      if (!items.length) return;
-      const nextIndex = (currentIndex - 1 + items.length) % items.length;
-      setLightboxImage(nextIndex);
-    }
+            function openLightbox(index) {
+                if (!items.length) return;
+                previouslyFocused = document.activeElement;
+                setLightboxImage(index);
+                lightbox.classList.add('is-open');
+                lightbox.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('no-scroll');
+                closeBtn.focus();
+            }
 
-    function showNext() {
-      if (!items.length) return;
-      const nextIndex = (currentIndex + 1) % items.length;
-      setLightboxImage(nextIndex);
-    }
+            function closeLightbox() {
+                lightbox.classList.remove('is-open');
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('no-scroll');
+                lightboxImg.removeAttribute('src');
+                lightboxImg.alt = '';
 
-    function hashString(str) {
-      let h = 2166136261;
-      for (let i = 0; i < str.length; i += 1) {
-        h ^= str.charCodeAt(i);
-        h += (h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24);
-      }
-      return Math.abs(h >>> 0);
-    }
+                if (previouslyFocused && typeof previouslyFocused.focus === 'function') {
+                    previouslyFocused.focus();
+                }
+            }
 
-    function makeItem(file, index) {
-      return new Promise((resolve) => {
-        const src = IMAGE_BASE_PATH + file;
-        const probe = new Image();
+            function showPrev() {
+                if (!items.length) return;
+                const nextIndex = (currentIndex - 1 + items.length) % items.length;
+                setLightboxImage(nextIndex);
+            }
 
-        probe.onload = () => {
-          const width = Math.max(1, probe.naturalWidth);
-          const height = Math.max(1, probe.naturalHeight);
-          const ratio = width / height;
-          const alt = altFromFilename(file, index);
-          resolve({ src, alt, ratio, index });
-        };
+            function showNext() {
+                if (!items.length) return;
+                const nextIndex = (currentIndex + 1) % items.length;
+                setLightboxImage(nextIndex);
+            }
 
-        probe.onerror = () => resolve(null);
-        probe.src = src;
-      });
-    }
+            function hashString(str) {
+                let h = 2166136261;
+                for (let i = 0; i < str.length; i += 1) {
+                    h ^= str.charCodeAt(i);
+                    h += (h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24);
+                }
+                return Math.abs(h >>> 0);
+            }
 
-    function applySpanPattern(figure, item, position) {
-      if (window.matchMedia('(max-width: 760px)').matches) return;
+            function makeItem(file, index) {
+                return new Promise((resolve) => {
+                    const src = IMAGE_BASE_PATH + file;
+                    const probe = new Image();
 
-      const ratio = item.ratio;
-      const h = hashString(item.src + ':' + position);
+                    probe.onload = () => {
+                        const width = Math.max(1, probe.naturalWidth);
+                        const height = Math.max(1, probe.naturalHeight);
+                        const ratio = width / height;
+                        const alt = altFromFilename(file, index);
+                        resolve({ src, alt, ratio, index });
+                    };
 
-      let colSpan = 1;
-      let rowSpan = 1;
+                    probe.onerror = () => resolve(null);
+                    probe.src = src;
+                });
+            }
 
-      if (ratio >= 1.55) colSpan = 2;
-      if (ratio <= 0.78) rowSpan = 2;
-      if (ratio <= 0.58) rowSpan = 3;
+            function applySpanPattern(figure, item, position) {
+                if (window.matchMedia('(max-width: 760px)').matches) return;
 
-      if (h % 9 === 0) {
-        colSpan = Math.min(2, colSpan + 1);
-      }
-      if (h % 8 === 0 && ratio < 1.05) {
-        rowSpan = Math.min(3, rowSpan + 1);
-      }
+                const ratio = item.ratio;
+                const h = hashString(item.src + ':' + position);
 
-      figure.style.gridColumn = 'span ' + colSpan;
-      figure.style.gridRow = 'span ' + rowSpan;
-    }
+                let colSpan = 1;
+                let rowSpan = 1;
 
-    function renderGallery() {
-      galleryGrid.innerHTML = '';
+                if (ratio >= 1.55) colSpan = 2;
+                if (ratio <= 0.78) rowSpan = 2;
+                if (ratio <= 0.58) rowSpan = 3;
 
-      items.forEach((item, index) => {
-        const figure = document.createElement('figure');
-        figure.setAttribute('tabindex', '0');
-        figure.setAttribute('role', 'button');
-        figure.setAttribute('aria-label', 'Ouvrir la photo ' + (index + 1));
+                if (h % 9 === 0) {
+                    colSpan = Math.min(2, colSpan + 1);
+                }
+                if (h % 8 === 0 && ratio < 1.05) {
+                    rowSpan = Math.min(3, rowSpan + 1);
+                }
 
-        const img = document.createElement('img');
-        img.src = item.src;
-        img.alt = item.alt;
-        img.loading = 'lazy';
-        img.decoding = 'async';
-        img.fetchPriority = index < 4 ? 'high' : 'auto';
+                figure.style.gridColumn = 'span ' + colSpan;
+                figure.style.gridRow = 'span ' + rowSpan;
+            }
 
-        figure.appendChild(img);
-        applySpanPattern(figure, item, index);
+            function renderGallery() {
+                galleryGrid.innerHTML = '';
 
-        figure.addEventListener('click', () => openLightbox(index));
-        figure.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            openLightbox(index);
-          }
-        });
+                items.forEach((item, index) => {
+                    const figure = document.createElement('figure');
+                    figure.setAttribute('tabindex', '0');
+                    figure.setAttribute('role', 'button');
+                    figure.setAttribute('aria-label', 'Ouvrir la photo ' + (index + 1));
 
-        figure.style.transitionDelay = (index % 16) * 24 + 'ms';
-        galleryGrid.appendChild(figure);
-        window.requestAnimationFrame(() => {
-          figure.classList.add('is-ready');
-        });
-      });
-    }
+                    const img = document.createElement('img');
+                    img.src = item.src;
+                    img.alt = item.alt;
+                    img.loading = 'lazy';
+                    img.decoding = 'async';
+                    img.fetchPriority = index < 4 ? 'high' : 'auto';
 
-    async function initGallery() {
-      const files = normalizeFiles();
+                    figure.appendChild(img);
+                    applySpanPattern(figure, item, index);
 
-      if (!files.length) {
-        renderEmptyState('Aucune image configurée.');
-        return;
-      }
+                    figure.addEventListener('click', () => openLightbox(index));
+                    figure.addEventListener('keydown', (event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            openLightbox(index);
+                        }
+                    });
 
-      const resolved = await Promise.all(files.map((file, index) => makeItem(file, index)));
-      const valid = resolved.filter(Boolean);
+                    figure.style.transitionDelay = (index % 16) * 24 + 'ms';
+                    galleryGrid.appendChild(figure);
+                    window.requestAnimationFrame(() => {
+                        figure.classList.add('is-ready');
+                    });
+                });
+            }
 
-      if (!valid.length) {
-        renderEmptyState('Aucune image trouvée dans assets/img/.');
-        return;
-      }
+            async function initGallery() {
+                const files = normalizeFiles();
 
-      items = valid;
-      galleryGrid.hidden = false;
-      emptyState.hidden = true;
-      renderGallery();
-    }
+                if (!files.length) {
+                    renderEmptyState('Aucune image configurée.');
+                    return;
+                }
 
-    let resizeTimer = null;
-    window.addEventListener('resize', () => {
-      window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(() => {
-        if (items.length) renderGallery();
-      }, 140);
-    });
+                const resolved = await Promise.all(files.map((file, index) => makeItem(file, index)));
+                const valid = resolved.filter(Boolean);
 
-    closeBtn.addEventListener('click', closeLightbox);
-    prevBtn.addEventListener('click', showPrev);
-    nextBtn.addEventListener('click', showNext);
+                if (!valid.length) {
+                    renderEmptyState('Aucune image trouvée dans assets/img/.');
+                    return;
+                }
 
-    lightbox.addEventListener('click', (event) => {
-      if (event.target === lightbox) closeLightbox();
-    });
+                items = valid;
+                galleryGrid.hidden = false;
+                emptyState.hidden = true;
+                renderGallery();
+            }
 
-    lightbox.addEventListener('touchstart', (event) => {
-      if (!event.changedTouches || !event.changedTouches[0]) return;
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
+            let resizeTimer = null;
+            window.addEventListener('resize', () => {
+                window.clearTimeout(resizeTimer);
+                resizeTimer = window.setTimeout(() => {
+                    if (items.length) renderGallery();
+                }, 140);
+            });
 
-    lightbox.addEventListener('touchend', (event) => {
-      if (!event.changedTouches || !event.changedTouches[0]) return;
-      const deltaX = event.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(deltaX) < 40) return;
-      if (deltaX > 0) showPrev(); else showNext();
-    }, { passive: true });
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', showPrev);
+            nextBtn.addEventListener('click', showNext);
 
-    document.addEventListener('keydown', (event) => {
-      const isOpen = lightbox.classList.contains('is-open');
-      if (!isOpen) return;
+            lightbox.addEventListener('click', (event) => {
+                if (event.target === lightbox) closeLightbox();
+            });
 
-      if (event.key === 'Escape') closeLightbox();
-      if (event.key === 'ArrowLeft') showPrev();
-      if (event.key === 'ArrowRight') showNext();
-    });
+            lightbox.addEventListener('touchstart', (event) => {
+                if (!event.changedTouches || !event.changedTouches[0]) return;
+                touchStartX = event.changedTouches[0].clientX;
+            }, { passive: true });
 
-    initGallery();
-  })();
-</script>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+            lightbox.addEventListener('touchend', (event) => {
+                if (!event.changedTouches || !event.changedTouches[0]) return;
+                const deltaX = event.changedTouches[0].clientX - touchStartX;
+                if (Math.abs(deltaX) < 40) return;
+                if (deltaX > 0) showPrev(); else showNext();
+            }, { passive: true });
+
+            document.addEventListener('keydown', (event) => {
+                const isOpen = lightbox.classList.contains('is-open');
+                if (!isOpen) return;
+
+                if (event.key === 'Escape') closeLightbox();
+                if (event.key === 'ArrowLeft') showPrev();
+                if (event.key === 'ArrowRight') showNext();
+            });
+
+            initGallery();
+        })();
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
