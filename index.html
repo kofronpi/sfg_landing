@@ -899,6 +899,7 @@
                 <a href="https://spond.com/client/groups/EF32BF04991C4377A2DBEC0D9B5D5268"
                    target="_blank"
                    rel="noopener"
+                   id="spond-btn-cta"
                    class="spond-btn">
                     <span class="label-full">S’inscrire au cours sur Spond</span>
                     <span class="label-short">S’inscrire</span>
@@ -1092,6 +1093,17 @@
         </div>
     </footer>
 
+    <div class="next-course-action">
+        <a href="https://spond.com/client/groups/EF32BF04991C4377A2DBEC0D9B5D5268"
+           target="_blank"
+           rel="noopener"
+           class="spond-btn"
+           id="courseActionBtn">
+            <span class="label-full">S’inscrire au cours sur Spond</span>
+            <span class="label-short">S’inscrire</span>
+        </a>
+    </div>
+
     <script>
         (function () {
             const toggle = document.querySelector(".menu-toggle");
@@ -1155,6 +1167,20 @@
             const isSummer2026 = now.getFullYear() === 2026 && (now.getMonth() === 6 || now.getMonth() === 7); // juillet = 6, août = 7
 
             // Affichage spécial pendant juillet et août 2026
+
+            const buttonSpond = document.getElementById("spond-btn-cta");
+            const cutoff = new Date(2026, 8, 6); // 6 septembre 2026
+
+            if (buttonSpond && now < cutoff) {
+                console.log("hey");
+                buttonSpond.href = "./Fiche_Inscription_SFG_2026_2027_.pdf";
+                buttonSpond.target = "_blank";
+                buttonSpond.innerHTML = `
+     <span class="label-full">Adhérer pour la saison 2026/2027</span>
+     <span class="label-short">Adhérer</span>
+     `;
+            }
+
             if (isSummer2026) { document.getElementById("nextCourse").innerHTML = "<strong>Reprise des cours le 8 septembre 2026</strong>"; return; }
 
             const planning = [
@@ -1236,7 +1262,7 @@
 
                         const c = courses[0];
                         html = `<strong>Prochain cours ${label} :</strong>
-                    ${c.name} — ${c.start}/${c.end} — ${c.place} — ${c.coach}`;
+                        ${c.name} — ${c.start}/${c.end} — ${c.place} — ${c.coach}`;
                         found = true;
                         break;
                     }
